@@ -2,34 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Eero&#39;s blog</title>
-    <link>http://example.org/projects/</link>
+    <link>http://eeromutka.github.io/projects/</link>
     <description>Recent content in Projects on Eero&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.org/projects/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="http://eeromutka.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mortal Shell</title>
-      <link>http://example.org/projects/mortal_shell/</link>
+      <link>http://eeromutka.github.io/projects/mortal_shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/projects/mortal_shell/</guid>
+      <guid>http://eeromutka.github.io/projects/mortal_shell/</guid>
       <description>&lt;p&gt;Through a game-jam friend, I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. It&amp;rsquo;s a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>My game jam projects</title>
-      <link>http://example.org/projects/game_jam_projects/</link>
+      <link>http://eeromutka.github.io/projects/game_jam_projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/projects/game_jam_projects/</guid>
+      <guid>http://eeromutka.github.io/projects/game_jam_projects/</guid>
       <description>&lt;p&gt;Game jams really got me hooked into game development when I first started out. I&amp;rsquo;ve participated in many game jams, both alone as well as in teams. Here are some highlights!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rug Racers: Ultimate</title>
-      <link>http://example.org/projects/rug_racers/</link>
+      <link>http://eeromutka.github.io/projects/rug_racers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/projects/rug_racers/</guid>
+      <guid>http://eeromutka.github.io/projects/rug_racers/</guid>
       <description>&amp;ldquo;Rug Racers: Ultimate&amp;rdquo; is an arcade flying-carpet racing game where you race against your friend on a physical carpet. I was the lead programmer responsible for making the engine, the input system and a lot of the gameplay code, and I also did a lot of game design. We were a 6-person team and made the game during a 10 week long school course. We won 2 awards at Gotland Game Conference, as well as got nominated at Swedish Game Awards!</description>
     </item>
     

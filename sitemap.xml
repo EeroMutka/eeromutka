@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/about/</loc>
+    <loc>http://eeromutka.github.io/about/</loc>
     <lastmod>2023-06-02T01:21:38+02:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>http://eeromutka.github.io/categories/</loc>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>http://eeromutka.github.io/</loc>
   </url><url>
-    <loc>http://example.org/projects/mortal_shell/</loc>
+    <loc>http://eeromutka.github.io/projects/mortal_shell/</loc>
   </url><url>
-    <loc>http://example.org/projects/game_jam_projects/</loc>
+    <loc>http://eeromutka.github.io/projects/game_jam_projects/</loc>
   </url><url>
-    <loc>http://example.org/projects/</loc>
+    <loc>http://eeromutka.github.io/projects/</loc>
   </url><url>
-    <loc>http://example.org/projects/rug_racers/</loc>
+    <loc>http://eeromutka.github.io/projects/rug_racers/</loc>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>http://eeromutka.github.io/tags/</loc>
   </url>
 </urlset>
