@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Eero&#39;s blog</title>
+    <link>http://eeromutka.github.io/posts/</link>
+    <description>Recent content in Posts on Eero&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://eeromutka.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The reference massacre</title>
+      <link>http://eeromutka.github.io/posts/the_reference_massacre/</link>
+      <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/posts/the_reference_massacre/</guid>
+      <description>Quick test: Can you spot the bug in the following C++ code?
+void spawn_explosion(GameWorld* world, const Vector3&amp;amp; center, float radius){spawn_epic_particles(center);play_explosion_sound(center);// Destroy entities that are too close to the explosionfor (int i = world-&amp;gt;entities.count - 1; i &amp;gt;= 0; i--){if (length(world-&amp;gt;entities[i].position - center) &amp;lt; radius){array_remove(&amp;amp;world-&amp;gt;entities, i);}}} It&amp;rsquo;s tricky, because by itself, there is no bug. But now consider the following:</description>
+    </item>
+    
+    <item>
+      <title>Generating a 3D mesh from a list of scissor-planes</title>
+      <link>http://eeromutka.github.io/posts/geometry_from_planes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/posts/geometry_from_planes/</guid>
+      <description>Recently I started a new project of making a real-time 3D editor, using CSG (constructive solid geometry). I didn&amp;rsquo;t exactly know how CSG worked before, so I looked into some articles. I learned some cool things, such as what the half-edge data structure is. Previously, it had been a big mystery to me how you would actually implement a 3d modeling operation such as extrusion, bevel, or inserting edge loops, but this small idea really opened things up for me.</description>
+    </item>
+    
+  </channel>
+</rss>

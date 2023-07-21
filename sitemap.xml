@@ -3,26 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://eeromutka.github.io/</loc>
+    <lastmod>2023-07-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://eeromutka.github.io/posts/</loc>
+    <lastmod>2023-07-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://eeromutka.github.io/posts/the_reference_massacre/</loc>
+    <lastmod>2023-07-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://eeromutka.github.io/portfolio/</loc>
     <lastmod>2023-07-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://eeromutka.github.io/projects/</loc>
+    <loc>http://eeromutka.github.io/portfolio/rug_racers/</loc>
     <lastmod>2023-07-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://eeromutka.github.io/projects/rug_racers/</loc>
-    <lastmod>2023-07-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://eeromutka.github.io/projects/mortal_shell/</loc>
+    <loc>http://eeromutka.github.io/portfolio/mortal_shell/</loc>
     <lastmod>2023-07-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://eeromutka.github.io/about/</loc>
-    <lastmod>2023-06-02T01:21:38+02:00</lastmod>
-  </url><url>
-    <loc>http://eeromutka.github.io/projects/ffz_programming_language/</loc>
+    <loc>http://eeromutka.github.io/portfolio/ffz_programming_language/</loc>
     <lastmod>2023-05-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://eeromutka.github.io/categories/</loc>
   </url><url>
-    <loc>http://eeromutka.github.io/projects/game_jam_projects/</loc>
+    <loc>http://eeromutka.github.io/contact/</loc>
+  </url><url>
+    <loc>http://eeromutka.github.io/posts/geometry_from_planes/</loc>
+  </url><url>
+    <loc>http://eeromutka.github.io/portfolio/game_jam_projects/</loc>
   </url><url>
     <loc>http://eeromutka.github.io/tags/</loc>
   </url>

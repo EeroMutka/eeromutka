@@ -1,59 +1,75 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Eero Mutka on Eero&#39;s blog</title>
+    <title>Eero&#39;s blog</title>
     <link>http://eeromutka.github.io/</link>
-    <description>Recent content in Eero Mutka on Eero&#39;s blog</description>
+    <description>Recent content on Eero&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://eeromutka.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://eeromutka.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The reference massacre</title>
+      <link>http://eeromutka.github.io/posts/the_reference_massacre/</link>
+      <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/posts/the_reference_massacre/</guid>
+      <description>Quick test: Can you spot the bug in the following C++ code?
+void spawn_explosion(GameWorld* world, const Vector3&amp;amp; center, float radius){spawn_epic_particles(center);play_explosion_sound(center);// Destroy entities that are too close to the explosionfor (int i = world-&amp;gt;entities.count - 1; i &amp;gt;= 0; i--){if (length(world-&amp;gt;entities[i].position - center) &amp;lt; radius){array_remove(&amp;amp;world-&amp;gt;entities, i);}}} It&amp;rsquo;s tricky, because by itself, there is no bug. But now consider the following:</description>
+    </item>
+    
     <item>
       <title>Rug Racers: Ultimate</title>
-      <link>http://eeromutka.github.io/projects/rug_racers/</link>
+      <link>http://eeromutka.github.io/portfolio/rug_racers/</link>
       <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://eeromutka.github.io/projects/rug_racers/</guid>
+      <guid>http://eeromutka.github.io/portfolio/rug_racers/</guid>
       <description>&amp;ldquo;Rug Racers: Ultimate&amp;rdquo; is an arcade flying-carpet racing game where you race against your friend on a physical carpet. I was the lead programmer responsible for making the engine, the input system and a lot of the gameplay code, and I also did a lot of game design. We were a 6-person team and made the game during a 10 week long school course. We won 2 awards at Gotland Game Conference, as well as got nominated at Swedish Game Awards!</description>
     </item>
     
     <item>
       <title>Mortal Shell</title>
-      <link>http://eeromutka.github.io/projects/mortal_shell/</link>
+      <link>http://eeromutka.github.io/portfolio/mortal_shell/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://eeromutka.github.io/projects/mortal_shell/</guid>
+      <guid>http://eeromutka.github.io/portfolio/mortal_shell/</guid>
       <description>&lt;p&gt;Through a game-jam friend, I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. It&amp;rsquo;s a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>test title</title>
-      <link>http://eeromutka.github.io/about/</link>
-      <pubDate>Fri, 02 Jun 2023 01:21:38 +0200</pubDate>
-      
-      <guid>http://eeromutka.github.io/about/</guid>
-      <description>Introduction This is bold text, and this is emphasized text.
-aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo: aaavideo:
-test
-video&amp;hellip;
-subtitle This is my amazing website.
-Visit the Hugo website!</description>
-    </item>
-    
-    <item>
       <title>A programming language &amp; code generator</title>
-      <link>http://eeromutka.github.io/projects/ffz_programming_language/</link>
+      <link>http://eeromutka.github.io/portfolio/ffz_programming_language/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
+      <guid>http://eeromutka.github.io/portfolio/ffz_programming_language/</guid>
       <description>Recently, I&amp;rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&amp;rsquo;s also sometimes frustrating due to the oddities of C++: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm.</description>
     </item>
     
     <item>
-      <title>My game jam projects</title>
-      <link>http://eeromutka.github.io/projects/game_jam_projects/</link>
+      <title>Contact</title>
+      <link>http://eeromutka.github.io/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://eeromutka.github.io/projects/game_jam_projects/</guid>
+      <guid>http://eeromutka.github.io/contact/</guid>
+      <description>Email: eero.mutka@gmail.com
+Discord: Eero#4198
+I live in Stockholm, Sweden, and I&amp;rsquo;m available for opportunities.</description>
+    </item>
+    
+    <item>
+      <title>Generating a 3D mesh from a list of scissor-planes</title>
+      <link>http://eeromutka.github.io/posts/geometry_from_planes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/posts/geometry_from_planes/</guid>
+      <description>Recently I started a new project of making a real-time 3D editor, using CSG (constructive solid geometry). I didn&amp;rsquo;t exactly know how CSG worked before, so I looked into some articles. I learned some cool things, such as what the half-edge data structure is. Previously, it had been a big mystery to me how you would actually implement a 3d modeling operation such as extrusion, bevel, or inserting edge loops, but this small idea really opened things up for me.</description>
+    </item>
+    
+    <item>
+      <title>My game jam projects</title>
+      <link>http://eeromutka.github.io/portfolio/game_jam_projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/portfolio/game_jam_projects/</guid>
       <description>&lt;p&gt;Game jams really got me hooked into game development when I first started out. I&amp;rsquo;ve participated in many game jams, both alone as well as in teams. Here are some fun highlights!&lt;/p&gt;</description>
     </item>
     
