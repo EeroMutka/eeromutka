@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>A programming language &amp; code generator | </title>
+    <title>Building a compiler from scratch | </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Recently, I&rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&rsquo;s also sometimes frustrating due to the oddities of C&#43;&#43;: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm.">
+    <meta name="description" content="One day I got annoyed at all the problems of C&#43;&#43; and the fact that there weren&rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&rsquo;d get.">
     <meta name="generator" content="Hugo 0.112.6">
     
     
@@ -29,19 +29,19 @@
 
     
     
-    <meta property="og:title" content="A programming language &amp; code generator" />
-<meta property="og:description" content="Recently, I&rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&rsquo;s also sometimes frustrating due to the oddities of C&#43;&#43;: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm." />
+    <meta property="og:title" content="Building a compiler from scratch" />
+<meta property="og:description" content="One day I got annoyed at all the problems of C&#43;&#43; and the fact that there weren&rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&rsquo;d get." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://eeromutka.github.io/projects/ffz_programming_language/" /><meta property="article:section" content="projects" />
 <meta property="article:published_time" content="2023-05-02T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-05-02T00:00:00+00:00" />
-<meta itemprop="name" content="A programming language &amp; code generator">
-<meta itemprop="description" content="Recently, I&rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&rsquo;s also sometimes frustrating due to the oddities of C&#43;&#43;: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm."><meta itemprop="datePublished" content="2023-05-02T00:00:00+00:00" />
+<meta itemprop="name" content="Building a compiler from scratch">
+<meta itemprop="description" content="One day I got annoyed at all the problems of C&#43;&#43; and the fact that there weren&rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&rsquo;d get."><meta itemprop="datePublished" content="2023-05-02T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2023-05-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2223">
+<meta itemprop="wordCount" content="2225">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="A programming language &amp; code generator"/>
-<meta name="twitter:description" content="Recently, I&rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&rsquo;s also sometimes frustrating due to the oddities of C&#43;&#43;: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm."/>
+<meta name="twitter:title" content="Building a compiler from scratch"/>
+<meta name="twitter:description" content="One day I got annoyed at all the problems of C&#43;&#43; and the fact that there weren&rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&rsquo;d get."/>
 
 	
   </head>
@@ -93,7 +93,7 @@
 
       <div class="tc-l pv6 ph3 ph4-ns">
         
-          <div class="f2 f1-l fw2 white-90 mb0 lh-title">A programming language &amp; code generator</div>
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Building a compiler from scratch</div>
           
         
       </div>
@@ -127,7 +127,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">A programming language &amp; code generator</h1>
+      <h1 class="f1 athelas mt3 mb1">Building a compiler from scratch</h1>
       
       
       
@@ -137,32 +137,31 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>Recently, I&rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&rsquo;s also sometimes frustrating due to the oddities of C++: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm.</p>
-<p>&hellip; I had looked into alternatives, such as the Jai and the Odin programming languages. They both mostly solve the same problems that I have, but neither left me satisfied. Jai is not released to the public with its unknown release date and no plan of open sourcing it. Odin on the other hand left me with a bad debugging experience, as the debug-information was buggy and incomplete (i.e. you can&rsquo;t see some values in the debugger), and the compiler was somewhat slow and occasionally crashed for me in debug-mode. This search for nicer tools made me wonder why there aren’t many alternatives - could it be that hard to make? I just want something simple that is enjoyable to use, fast, with quick compile times, and with a few secret ideas I have sprinkled in. And so I said: &ldquo;Screw it, I&rsquo;ll do it myself&rdquo;.</p>
-<p>So, how do I make a programming language, like C/C++? I want to read text files and transform them into a magical executable file that can be run by the computer. Let&rsquo;s start from the end, the executable file. The executable file depends on the OS, but wouldn’t be too difficult to generate myself. However, if I wanted to be able to use code made in other languages like C++ in my language, it’d be useful to use a linker. The job of a linker is to take in other magical files called object files (or static library files, AFAIK they’re kind of the same thing), and output the executable file. This way, I could compile code in other programming languages into object/static library files, generate an object file from my programming language, and link them together into an executable file using a linker.</p>
-<p>I looked into generating object files, I found <a href="https://wiki.osdev.org/COFF">this wiki page</a> helpful. An object file contains the compiled machine code that the target processor can execute. Basically, it’s a list of instructions, usually X64 instructions, for each function. An instruction can for example add two values together or store a value into memory. Generating all of this is a bit complicated, especially since the object file format varies per operating system, and that there are more processor architectures than just X64. There is one library that handles this, though, which is LLVM. A lot of compilers use it since it can output to lots of different targets and it can do transformations that optimize the code to run fast. But from what I have heard and seen, it&rsquo;s a complicated beast with millions of lines of code and it&rsquo;s also very slow to run. I knew this from the start, which was the reason why I dug into how I might generate these files myself. I want my language to be fun to use, and part of that is having quick iteration times. Plus, it&rsquo;s nice to not depend on the shoulders of giants and to not take an hour to build the compiler itself. And, it’s a topic I’m interested in learning about and just a fun exercise to do from the ground up!</p>
-<p>We could of course skip all of this difficulty and just generate source code for another programming language like C, and use their compiler as a second step. This is easy, and we will even get optimizations just like that! But it will take longer to compile. And perhaps the biggest problem with this is the story of debugging. If you wanted to then debug your code, you&rsquo;d be debugging an unreadable mess of generated source code. If we generate the object files directly, we can generate the debug information too just like the C compiler would, and use a debugger like Visual Studio to debug the code written in our language.</p>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>One day I got annoyed at all the problems of C++ and the fact that there weren&rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&rsquo;d get.</p>
+<p>I should preface this with some of the problems I see with C++. The biggest one is how complicated of a language it is: it&rsquo;s impossible to fully understand all of its features and quirks. Everyone has to pick a subset of features to use, and the larger the subset, the less people will be able to easily follow your code. The C++ coding culture/style often follows this complexity: if you&rsquo;ve stepped into any <code>std::</code> function, or gotten bit by an error from <code>std::</code> template code, you know what I mean. Don&rsquo;t pretend you understand what&rsquo;s going on there. Building other people&rsquo;s code and integrating libraries is a mess and often requires wizardly debugging skills. Compile times and iteration speed can be awful. There is a lot of weird unnecessary legacy inherited from C, like order-dependent declarations and the inability to return <code>float[3]</code> from a function. A lot of the features that C++ did add on top of C were designed haphazardly, i.e. namespaces. The purpose of namespaces is to avoid naming collisions, but since the code implementor decides their name, and whoever uses the code has no say over it, they don&rsquo;t solve anything as naming collisions can still happen just like in C. There&rsquo;s a lot of bad design and I can easily imagine a better future.</p>
+<p>So then, how do I actually do it? How can one remake C/C++? I want to read text files and transform them into a magical executable file that can be run by the computer. Let&rsquo;s start from the end, the executable file. The executable file depends on the OS, but wouldn’t be too difficult to generate myself. However, if I wanted to be able to use code made in other languages like C++ in my language, it’d be useful to use a linker. The job of a linker is to take in other magical files called object files (or static library files, AFAIK they’re kind of the same thing), and output the executable file. This way, I could compile code in other programming languages into object / static library files, generate an object file from my programming language, and link them together into an executable file using the OS-provided linker.</p>
+<p>When I looked into generating object files, I found <a href="https://wiki.osdev.org/COFF">this wiki page</a> helpful. An object file contains the compiled machine code that the target processor can execute. It’s basically a list of instructions for the specific processor kind (in my case X64), for each function. An instruction can for example add two values together or store a value into memory. Generating all of this is a bit complicated, especially since the object file format varies per operating system, and given that there are more processor architectures than just X64. There is one popular library that handles this, though, which is LLVM. A lot of compilers use it since it can output to lots of different target architectures and platforms and it can do advanced transformations that optimize the code to run efficiently. But from what I have heard and seen, it&rsquo;s a complicated beast with millions of lines of code and it&rsquo;s also very slow to run. I knew this from the start, which was the reason for why I dug into how I might generate these files myself. I want my language to be a joy to use, and part of that is having quick iteration times.</p>
+<p>We could of course skip all of this difficulty and just generate source code for another programming language like C, and use their compiler as a second step. This is easy, and we will even get optimizations for free! But it will take longer to compile. And perhaps the biggest problem with this is the story of debugging. If you wanted to then debug your code, you&rsquo;d be debugging an unreadable mess of generated C code. If we generate the object files directly, we can generate the debug information too just like the C compiler would, and use a debugger like Visual Studio to debug the code written in our language.</p>
 <p>The solution I came to is to have two paths for the compiler:</p>
 <ol>
 <li>Generate C code for when you want to get all the nice optimizations or make a build for a platform/architecture that&rsquo;s not supported by option 2.</li>
 <li>Generate X64 object files directly with debug information, for quick iteration times and nice debugging</li>
 </ol>
-<p>The first is easier to implement than the second, but the second is still necessary. I wanted to bundle this two-path backend into its own standalone library for anyone to use and learn from, kind of as a simple alternative to LLVM. I’m calling it GMMC, short for “Give Me Machine Code”. GMMC was actually another reason for why I think making the language could be valuable - I felt like there’s a big spot missing for a simpler LLVM alternative, and if I were to make something like it, the language would be a good stress test for it. This backend needs to give the user a useful set of operations that can be easily generated into both C and X64. Since C is meant to be a low level abstraction, this ended up working quite naturally.</p>
-<p>I could write a lot about making GMMC, but I’ll try to keep it short. Figuring out how to generate machine code and debug info wasn&rsquo;t so easy. So far I&rsquo;ve only been working on generating object files on Windows. It took quite a bit of researching, testing and looking at bytes in a hex editor to get things to work, but the progress has been slow and steady. I initially learned about X64 assembly from <a href="https://www.youtube.com/watch?v=rxsBghsrvpI">this lovely guy</a>. I also ended up using the <a href="https://github.com/zyantific/zydis">Zydis</a> disassembler/assembler library for easily generating the actual instructions from code. If I wanted to know how something worked, I could always just invoke the C compiler and look at the generated file and compare it to a file I generated myself. <a href="https://godbolt.org/">Godbolt</a> has also been helpful to quickly see how something would be generated in assembly. The Microsoft debug information was particularly annoying to figure out, because it&rsquo;s not documented anywhere, except as <a href="https://github.com/microsoft/microsoft-pdb">bits and pieces</a> of source code.</p>
-<p>Now that we had a somewhat working compiler backend, it was time for the language itself. The basic idea is to read in the text files and build a tree structure out of it that holds a node for each little code unit, such as an addition operator, or a function definition. For example, for the following piece of code:</p>
+<p>The first is easier to implement than the second, but the second is still necessary. I wanted to bundle this two-path backend into its own standalone library for anyone to use and learn from, kind of as a simple alternative to LLVM. I’m calling it GMMC, as in Give-Me-Machine-Code. GMMC was another reason I wanted to do this project - I felt like there’s a big spot missing for a simpler LLVM alternative, and if I were to make something like it, the language would be a good stress test for it. This backend needs to give the user a useful set of operations that can be easily generated into both C and X64. Since C is meant to be a low level abstraction, this ended up working quite naturally.</p>
+<p>I could write a lot about making GMMC, but I’ll try to keep it short. Figuring out how to generate machine code and debug info wasn&rsquo;t so easy. So far I&rsquo;ve only been working on generating object files on Windows. It took quite a bit of researching, testing and looking at bytes in a hex editor to get things to work, but the progress has been slow and steady. I initially learned about X64 assembly from <a href="https://www.youtube.com/watch?v=rxsBghsrvpI">Creel&rsquo;s youtube videos</a>. I also ended up using the <a href="https://github.com/zyantific/zydis">Zydis</a> disassembler/assembler library for easily generating the actual instructions from code. If I wanted to know how something worked, I could always just invoke the C compiler and look at the generated file and compare it to a file I generated myself. <a href="https://godbolt.org/">Godbolt</a> has also been helpful to quickly see how something would be generated in assembly. The Microsoft debug information was particularly annoying to figure out, because it&rsquo;s not documented anywhere, except as <a href="https://github.com/microsoft/microsoft-pdb">a source code dump</a> from Microsoft that doesn&rsquo;t include everything and can&rsquo;t be compiled.</p>
+<p>I now had a somewhat working compiler backend and it was time for the language itself. The basic idea is to read in the text files and build a tree structure out of it that holds a node for each little code unit, such as an addition operator, or a function definition. For example, for the following piece of code:</p>
 <pre tabindex="0"><code>result: a*t + (1.0 - t)*b
 </code></pre><p>&hellip; the abstract syntax tree looks something like:</p>
 <p><img src="ast.png" alt="Image"></p>
-<p>This tree form, often called the “abstract syntax tree”, is a lot easier to deal with than a string of text. Each node stores a pointer to its child nodes, as well as its parent node, so it’s easy to traverse through the tree. Generating the tree is pretty simple by eating characters from the code string and separating it into words/tokens and adding new nodes as we go. One thing that took a bit of pondering is dealing with operator precedence. For example, multiplication should get a higher priority than addition. Solutions I found online for this problem were quite confusing in my mind, but I think I figured out a pretty neat and simple way to do it:</p>
+<p>This tree, often called the “abstract syntax tree”, is a lot easier to deal with than a string of text. Each node stores a pointer to its child nodes, as well as its parent node, so it’s easy to traverse through the tree. Generating the tree is pretty simple by eating characters from the code string and separating it into words/tokens and adding new nodes as we go. I would allocate each node from the same memory arena such that iterating the tree would be really fast with minimal cache misses. One thing that took a bit of pondering is dealing with operator precedence. For example, multiplication should get a higher priority than addition. In the end, I found a neat way to do it:</p>
 <ol>
-<li>Build a flat array of the operators, i.e. {*, +, *}</li>
+<li>Build an array of the operators, i.e. {*, +, *}</li>
 <li>Find the operator with the lowest precedence (i.e. the +). This will be the parent/root node.</li>
 <li>Slice the array into two halves - a half that’s fully on the left side of the parent, and a half that’s fully on the right side.</li>
 <li>We can find the left and the right child nodes for the parent node by recursing to step number 2. using the two slices.</li>
 </ol>
-<p>Once we have the tree, we can traverse through it and make sure that the program is correct and contains no errors, i.e. you&rsquo;re not calling a function that expects two parameters with only one argument. We also need to give each node that results in a value, a type (such as an integer, a float, or a boolean), and make sure that the types match too. As a last step, if everything has succeeded so far, we can traverse the tree again and start feeding it to GMMC, which takes it from there.</p>
-<p>That&rsquo;s pretty much it!</p>
-<p>It’s time for a little showcase. Let me introduce you to the FFZ programming language - the programming language that is simple enough that I can hopefully finish soon-ish! Okay, maybe that is underselling it a little bit. Simplicity is a really good thing - I want the compiler to not be daunting to those who want to look into how it works or modify/extend it. I digress, here&rsquo;s a “Hello world” program in FFZ:</p>
+<p>Once we have the tree, we can traverse through it and make sure that the program is correct and contains no errors. We also need to give each node that can act as a value, a type (i.e. int, a float, bool, etc), and make sure that the types match or report an error otherwise. As a last step, if everything has succeeded, we traverse the tree again and start feeding it to GMMC, which takes it from there.</p>
+<p>That&rsquo;s mostly it. Now, let me introduce the FFZ programming language! Here&rsquo;s a Hello World program in FFZ:</p>
 <pre tabindex="0"><code>#Basic: import(&#34;:Basic&#34;)
 
 #entry: proc {
@@ -181,43 +180,32 @@
 	}
 	ret n * factorial(n - 1)
 }
-</code></pre><p>For a more real example, here’s a snake game <a href="https://pastebin.com/nTb7dVeC">(source)</a> I made in the language:
+</code></pre><p>For a real example, here’s a snake game <a href="https://pastebin.com/nTb7dVeC">(source code)</a> I made in the language:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/WTNVoJyvpKA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
-<p>I’m calling external Raylib code to create the window and draw the graphics in this example. It’s really satisfying to make something that actually works in the language! Slightly less satisfying is having to fix a thousand bugs in the compiler to be able to do that. I can also debug the program in a debugger like Visual Studio, here&rsquo;s a video of that:
+<p>I’m calling external Raylib code to create the window and draw the graphics in this example. It’s really satisfying to make something that actually works in the language! Slightly less satisfying is having to fix all the bugs in the compiler in the process. I can also debug the program in a debugger like Visual Studio. Here&rsquo;s a video of that:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/kfbfswcj2wI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
-<p>Note how you can inspect local variables, the call stack, and even step into foreign code.</p>
-<p>The language isn’t too fancy, but that’s the goal. There are still some cool things about FFZ:</p>
+<p>Note how I can inspect the values of local variables, hop around the call stack, and even step into foreign code.</p>
+<p>The language design isn’t too fancy, but that’s the goal. There are still some cool things about FFZ that I&rsquo;ve already implemented:</p>
 <ul>
-<li>no header files</li>
-<li>declarations can be in any order</li>
-<li>the user of a module decides the namespace prefix</li>
-<li>built-in string, array and slice types with range checking</li>
-<li>named function &amp; struct initializer arguments</li>
-<li>nice error messages</li>
-<li>no undefined behavior footguns</li>
-<li>intuitive and searchable declaration syntax</li>
-<li>implicit dereferencing (no need for -&gt;, just use .)</li>
+<li>out of order declarations</li>
+<li>modules with name-prefixing</li>
+<li>string, array and slice types with range checking</li>
+<li>named function and struct initializer arguments with support for default values</li>
+<li>intuitive error messages</li>
 <li>parametric polymorphism, i.e. ability to implement a generic Array type</li>
 </ul>
-<p>Unimplemented future ideas:</p>
-<ul>
-<li>cast overflow checking</li>
-<li>break with named block scopes</li>
-<li>for-loops over slices</li>
-<li>“optional” type</li>
-<li>built-in array math, i.e. [3]int{1, 2, 3} + [3]int{5, 6, 7} would give [3]int{6, 8, 10}</li>
-</ul>
-<p>Perhaps one of the biggest reasons why I’m excited about this project is my plan of making it into an easy-to-use library. I want it to be easy to inspect and modify the code you write. What I mean is, what if you want to write an analysis tool for your codebase? Or make the compiler automatically insert profiling code in every function entry and exit points? Or what if you want to look at the struct definitions in your program so that you can automatically generate a user interface for it? Or maybe you want to make some crazy debug visualization tool.</p>
-<p>Exposing this kind of functionality shouldn’t be that difficult, but I feel like these kinds of things are impossible or difficult to do using present systems. The Jai language seems to be an exception with its metaprogramming features, but I feel like adding these kinds of features into the language itself is the wrong direction. It makes the system more complex and raises questions about the behavior of pointers during compile-time, and it’s not possible to debug the metaprogram anymore. Instead, I believe the compiler should just be a library so that anyone curious could plug their code into. I love libraries like stb-image that just give you a stupid simple interface to do the work that you want, and I want to try to do that for FFZ too.</p>
-<p>A big design challenge has been to decide which features I should add to the language. There are lots of useful features I can Imagine I would want, but at the same time, I want the language to remain simple to implement and to understand. I want to finish this project in a reasonable amount of time, like in a year - I don’t want to drag it out forever like lots of other language projects seem to be doing. Though, we’ll see. I think it would be really satisfying to say that it’s done, and that code written today in the language would still compile and work in 100 years. I’m going pretty deep into this rabbit hole and I do want to climb back up with something I could actually use for games and tools programming. So far, this has been a fun and exciting project and no matter what happens, I’ve learned a lot from it :)</p>
+<p>The biggest reason I’m excited about the project is making it into an easy-to-use library. I want it to be easy to inspect and modify the code you write. What if I wanted to make the compiler automatically insert profiling code in every function entry and exit points? Or maybe I want to inspect all the struct definitions so that I can automatically generate a user interface for it. I can imagine a lot of ways how having full control over the compiler could be really useful.</p>
+<p>Exposing this kind of functionality shouldn’t be too difficult, but most compilers don&rsquo;t allow it. Clang/LLVM is the only major compiler that does, but the inherent complexity of C++ limits how productive you can be with writing your own tools for it. Some newer languages, like Jai, also provide built-in metaprogramming features, but I feel like adding these kinds of features into the language itself is the wrong choice. It complicates the compiler, adds problems/questions like how pointers should behave during compile-time, and makes it impossible to step through the metaprogram in a debugger. Instead, I believe the compiler should just be a library. I love libraries like stb-image that just give you a stupid simple interface to do the work that you want, and I want to try to do that for FFZ too.</p>
+<p>A challenge has been to decide which features I should add to the language. There are lots of useful features I can imagine I would want, but at the same time, I want the language to remain simple to implement and to understand, and I don&rsquo;t want to drown in work. I don&rsquo;t know if there are any right or wrong answers, I&rsquo;ve mostly gone based on what feels right.</p>
+<p>My initial goal was to finish most of the language in a very limited time, like a year, and then start using it for other projects. In the end, I worked on this for ~6 months and benched it for time being as there are other cool projects I want to work on that would feel more rewarding compared to staring at bits all day. If I were to continue, it&rsquo;d also be a lot to take on to work a real project using an incomplete programming language that might contain bugs that need to be fixed. On top of that, I&rsquo;m not the only one who&rsquo;s making progress in the field: work is being done towards an <a href="https://github.com/RealNeGate/Cuik">LLVM alternative</a>, which I&rsquo;m excited for. Hopefully that project will keep maturing and I could use it for exciting future projects. In the meanwhile, I&rsquo;m going back to C/C++ to work on other projects. All in all, this experiment has been fun and has taught me a lot about programming and computers.</p>
 <ul class="pa0">
   
 </ul>

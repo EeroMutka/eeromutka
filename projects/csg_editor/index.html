@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>3D mesh boolean experiments | </title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made.">
+    <meta name="generator" content="Hugo 0.112.6">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="3D mesh boolean experiments" />
+<meta property="og:description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://eeromutka.github.io/projects/csg_editor/" /><meta property="article:section" content="projects" />
+<meta property="article:published_time" content="2023-05-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-20T00:00:00+00:00" />
+<meta itemprop="name" content="3D mesh boolean experiments">
+<meta itemprop="description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made."><meta itemprop="datePublished" content="2023-05-20T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-05-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2099">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="3D mesh boolean experiments"/>
+<meta name="twitter:description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('/projects/csg_editor/csg_editor_banner2.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/" title="Portfolio page">
+              Portfolio
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/contact/" title="Contact me page">
+              Contact me
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">3D mesh boolean experiments</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">3D mesh boolean experiments</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2023-05-20T00:00:00Z">May 20, 2023</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made.</p>
+<p>Sneak peak:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/kCL9DabX_wk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<h1 id="the-process">The process</h1>
+<p>A big inspiration for me was Media Molecule&rsquo;s Dreams, its 3D editor and their idea of <a href="https://youtu.be/DpSWMQgBpHI">&ldquo;sensitive tools&rdquo;</a>. The way they are using brushes to cut and build form in complicated ways with just simple and intuitive tools is really inspiring. It encourages playfulness and experimentation in a way that is missing from polygon-based 3D modeling programs.</p>
+<p><a href="https://youtu.be/u9KNtnCZDMI">The Dreams tech (Alex Evans, 2015)</a> uses lists of signed distance functions to represent geometry that go into a hierarchical voxel-splitting compute shader to generate point cloud clusters that get rendered by stochastically splatting them to the screen as textured quads using more compute shaders &hellip; Or something like that.</p>
+<p>SDFs is <a href="https://ephtracy.github.io/index.html?page=magicacsg#ss-carousel_ss">the trend now</a> for volumetric modeling. They are nice and simple, but they have the problem of how to render them - when the SDF becomes complicated with lots brushes, using naive raymarching gets more and more expensive. Dreams manages to make SDFs work with its hierarchical evaluator, though it still scales linearly with the number of brushes. Ideally, adding a brush somewhere and then immediately cutting it with another brush shouldn&rsquo;t affect the speed of the algorithm.</p>
+<p>An alternative is to convert them to polygon-based renderable geometry. This would be great for my editor, as it&rsquo;d make it easy to import and export models to/from other programs and asset stores. But doing the convertion quickly is a challenge. Alex Evans went through different experiments of this in his talk, and the best option seems to be to use something like marching cubes with a really dense grid, and then decimate the mesh to bring it down to a reasonable triangle density. But that would be too slow.</p>
+<p>If only there was a really fast mesh boolean algorithm that dealt with polygonal meshes&hellip; Adding a brush and removing it again would result in the same mesh, and thus wouldn&rsquo;t affect the performance! So, I looked into how to do 3D mesh booleans fast and robustly. I assumed it&rsquo;d be quite hard as they have a reputation of being fragile in most 3D software. Especially in edge cases, where you have two objects barely intersecting, the end result is usually broken. There are a few libraries, like CGAL, that can perform mesh booleans perfectly robustly, but they tend to be slow. I couldn&rsquo;t find an existing library that could do booleans/CSG fast and robustly, so I looked into how to do it myself.</p>
+<h2 id="first-attempt">First attempt</h2>
+<p>When trying to implement the booleans, I took inspiration from several papers, i.e. by <a href="https://arxiv.org/pdf/1308.4434.pdf">G. Mei &amp; J. Tipper</a>. Initially, I had an idea to use exact arithmetic using exact fractional numbers, where the numerator and denominator are both 64-bit integers as it&rsquo;d be easy to add, subtract, multiply, divide them and do comparisons exactly, as opposed to floats which are inexact and slowly but surely diverge from the true value. I soon learned that this rational number way is common practice to achieve robustness, but has the obvious flaw that when multiplied/divided a couple of times, the integers end up growing exponentially. Even though 64 bits seems big (it can hold the number of sand grains on earth!), due to chained multiplication, it&rsquo;s just not enough. Instead, the code must dynamically grow arrays for each integer as they grow bigger, but that also makes doing computations with them exceedingly expensive. In addition, the algorithms require calculating intersection points which require more information than the coordinates they were constructed from. To keep those exact coordinates around for future boolean operations, the information in the coordinates would get larger each time you would run the algorithm. Rounding them to a reasonable value range would result in loss of information, just like with floats.</p>
+<p>I decided to try making a boolean algorithm using floats and epsilons. The basic idea around most mesh boolean algorithms is to cut each polygon in mesh A by each polygon in mesh B, then for each formed subpolygon determine if it&rsquo;s inside mesh A and B, and based on those 2 inside/outside values and the boolean op (subtract/union/intersect), either discard it, keep it, or flip it. To make it efficient, some kinds of spatial data structures can be used, such as grids or octrees. I believe I got the algorithm quite close to being robust, but there were still edge cases where it would fail. It was then when I lost my faith in floats. Maybe with a different approach it could have still worked, but I just didn&rsquo;t believe I could do it. This video is from that version. Looking back at it, maybe I lost hope too soon - idk.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/0d8rbbI6TLU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="second-attempt">Second attempt</h2>
+<p>I took a break from the project to work on other things, but recently returned to it with a fresh mind. I once again looked at the research and to see if there was a way to avoid inexact computations / floats while being fast. I found some more papers that seemed promising, <a href="https://www.vci.rwth-aachen.de/publication/03339/">such as EMBER (J. Nehring-Wirxel et al.)</a> and I wanted to implement some of the ideas. One particularly brilliant idea I learned about from <a href="https://arxiv.org/abs/2103.02486">a previous paper by the same authors</a> is the use of plane-based geometry. The idea is to represent all geometry using planes, where a plane is defined as the four 64-bit integer coefficients <code>A, B, C, D</code> of the plane equation <code>Ax + Bx + Cx + Dx = 0</code>. Even though integers are used, a plane can still lie anywhere in space: by using big coefficients, the plane can be moved even in tiny increments. Edges are represented as the intersection of two planes, points by the intersection of three planes, and (convex) polygons by a supporting plane and a list of edge planes. Everything uses planes! Since the result of a mesh boolean only uses polygons from either of the two input meshes, possibly flipped or cut by each other&rsquo;s planes, it&rsquo;s possible to represent the resulting mesh using only the original planes from the two input meshes. That&rsquo;s fantastic, as it means that we can keep applying boolean operations as many times as we want, and the numerical information does not need to grow, meaning we can easily keep it all exact.</p>
+<p>The paper also explains how all we really need to implement a boolean operation is to be able to ask which side a point is to a plane, and an efficient way to compute that exactly as a function that takes in 4 planes, 3 for the point and 1 for the plane. I started implementing an algorithm based on EMBER. Every time I thought I&rsquo;d be close to done, a new subtle issue would appear that I didn&rsquo;t think of before. The segment traces were bringing trouble and trying to implement Simulation of Simplicity with them. Robustly choosing a point inside a polygon was also hard. I also had the idea of having a big grid and representing geometry locally per each block in local coordinates to get more resolution per coordinate, but I didn&rsquo;t realize it&rsquo;d introduce quantization errors and had to scrap that.</p>
+<p>I tried to make it possible to import meshes from blender to test the algorithm and I got gifted more problems. When importing a mesh, I&rsquo;d have to convert it to a version using quantized planes, which would add small errors such as holes and self-intersections. My idea for handling this was to use the neighbouring face planes as the edge planes to not get any holes, but that had two issues: firstly, the edge plane would be invalid if the neighbouring face were coplanar with the other face. Secondly, vertices with more than 3 touching faces would also be problematic due to an &ldquo;overshoot&rdquo; effect caused by using neighbouring planes as edge planes as shown in the video:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/KL-CCYU1Yo8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Having these kinds of small overshoot errors could mess up the inside-outside detection part of the boolean algorithm. The EMBER paper doesn&rsquo;t have this issue as it uses larger, 256-bit coordinates and a more precise way of quantization and as a result it can share vertices exactly across faces. I was stubborn and wanted to try doing everything with 64-bit as I still felt like it should be doable and I figured it would really benefit the speed through reduced memory usage, and as I could use SIMD too. All of this made me think about more ways to go about the problem. I was looking into the possibility of <a href="https://users.cs.utah.edu/~ladislav/jacobson13robust/jacobson13robust.html">using tetrahedral meshes and winding numbers (A. Jacobson et al.)</a>, when I asked the question: there may be quantization errors, but why is it that it doesn&rsquo;t matter as much in some mesh representations like voxels or tetrahedral meshes, whereas with mine it&rsquo;s a deal breaker? It occurred to me that my boundary representation has too much information that can go out of sync with itself and become invalid. With, say a voxel bitmap, the solid/empty space is always unambiguously defined no matter how you tweak the values. This realization led me to investigate BSP trees further, as they seem to fit my problem the best. They were promising for another reason too. I thought it was cool how the method by Jacobson et al. could solve self-intersections. If I had that working in my editor, I could imagine moving a face/edge/vertex around and make things self-intersect, and to see a hole automatically appear in the place of the self-intersection. Wouldn&rsquo;t that be awesome?</p>
+<h2 id="using-bsp-trees">Using BSP trees</h2>
+<p>So once again, I made a new algorithm. This time, the idea was to have two functions: one to go from a BSP tree into a plane-based boundary mesh, and vice versa. In short, to perform a boolean, I&rsquo;d cut the BSP tree of mesh A by all of the faces of mesh B, and afterwards, per each sub-region of space in the cut BSP tree, determine if it&rsquo;s inside mesh A and B, and use the boolean op again to determine if the sub-region should end up solid or empty. Then, we could just convert the resulting BSP tree into a boundary mesh and render it directly! One nice thing about doing the round trip from BSP -&gt; boundary -&gt; BSP is that it automatically cleans up the BSP tree from redundant splits, assuming we deduplicate overlapping planes while doing it. And yes, I finally got it to work robustly!</p>
+<p>(also see the original video at the top)
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/TDFQl0qRzqs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>There was a lot of possible optimizations I could have done, like using a grid acceleration structure to localize the required area of work, and to parallelize it. But first, I wanted to see if I could implement some basic editing features, and for that I needed to implement selections.</p>
+<h2 id="implementing-selections">Implementing selections</h2>
+<p>My idea for rectangle selections was simple enough: keep track of the brush ID, pass it as a vertex attribute and render it to a separate render target, then when selecting, run a compute shader over the render target and build a list of brush IDs that are visibly selected within the selection rectangle. But once again, it wasn&rsquo;t that easy. The problem was that when converting BSP -&gt; boundary -&gt; BSP, then the redundant splits get removed and with it, the information about the original brush ID gets merged and lost. My solution for this has been to avoid the BSP -&gt; boundary -&gt; BSP roundtrip and always keep building into the same BSP without removing any splits, and this has worked fine. The downside of course is that the BSP tree will keep growing and the growth could become exponential due to the way BSP cuts work. Having a grid should help there, and I&rsquo;m thinking that for a potential &ldquo;sculpt&rdquo; mode I will disallow selections and merge the tree, thus keeping it fast, but for &ldquo;blockout&rdquo; mode keep the ability to select and tweak individual brushes and accept the cost. Sculpting should be way more compute-heavy, so this should be a fine tradeoff.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/_NOYwEfi6w4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>I&rsquo;ve rambled for long enough and there&rsquo;s just too many things to talk about, too many challenges. I finally feel like I&rsquo;m coming out on top, though there are still a lot of things to do and I have barely even gotten started with the whole editor itself. I&rsquo;ve decided to take a rest from this project for now to work on something a bit different, but I&rsquo;ll see you again soon, mesh booleans.</p><ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://eeromutka.github.io/" >
+    &copy; 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -26,12 +26,21 @@
     </item>
     
     <item>
-      <title>A programming language &amp; code generator</title>
+      <title>3D mesh boolean experiments</title>
+      <link>http://eeromutka.github.io/projects/csg_editor/</link>
+      <pubDate>Sat, 20 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/csg_editor/</guid>
+      <description>&lt;p&gt;I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&amp;rsquo;s just begging to be made.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Building a compiler from scratch</title>
       <link>http://eeromutka.github.io/projects/ffz_programming_language/</link>
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
-      <description>Recently, I&amp;rsquo;ve been learning how to build game development and 3D tools using code. While this has been really fun, it&amp;rsquo;s also sometimes frustrating due to the oddities of C++: Header files, order dependent declarations, long compile times, weird casting rules, the list goes on. The following is a blog-style entry about my process of making a programming language prototype, and what I sent as my work sample for the Futuregames school in Stockholm.</description>
+      <description>One day I got annoyed at all the problems of C++ and the fact that there weren&amp;rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&amp;rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&amp;rsquo;d get.</description>
     </item>
     
     <item>
