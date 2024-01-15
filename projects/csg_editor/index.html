@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>3D mesh boolean experiments | </title>
+    <title>Experiments in Constructive Solid Geometry | </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made.">
+    <meta name="description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced.">
     <meta name="generator" content="Hugo 0.112.6">
     
     
@@ -29,19 +29,19 @@
 
     
     
-    <meta property="og:title" content="3D mesh boolean experiments" />
-<meta property="og:description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made." />
+    <meta property="og:title" content="Experiments in Constructive Solid Geometry" />
+<meta property="og:description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://eeromutka.github.io/projects/csg_editor/" /><meta property="article:section" content="projects" />
 <meta property="article:published_time" content="2023-05-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-05-20T00:00:00+00:00" />
-<meta itemprop="name" content="3D mesh boolean experiments">
-<meta itemprop="description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made."><meta itemprop="datePublished" content="2023-05-20T00:00:00+00:00" />
+<meta itemprop="name" content="Experiments in Constructive Solid Geometry">
+<meta itemprop="description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced."><meta itemprop="datePublished" content="2023-05-20T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2023-05-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="2099">
+<meta itemprop="wordCount" content="2098">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="3D mesh boolean experiments"/>
-<meta name="twitter:description" content="I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made."/>
+<meta name="twitter:title" content="Experiments in Constructive Solid Geometry"/>
+<meta name="twitter:description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced."/>
 
 	
   </head>
@@ -93,7 +93,7 @@
 
       <div class="tc-l pv6 ph3 ph4-ns">
         
-          <div class="f2 f1-l fw2 white-90 mb0 lh-title">3D mesh boolean experiments</div>
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Experiments in Constructive Solid Geometry</div>
           
         
       </div>
@@ -127,7 +127,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">3D mesh boolean experiments</h1>
+      <h1 class="f1 athelas mt3 mb1">Experiments in Constructive Solid Geometry</h1>
       
       
       
@@ -137,7 +137,7 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&rsquo;s just begging to be made.</p>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced.</p>
 <p>Sneak peak:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -152,7 +152,7 @@
 <p>If only there was a really fast mesh boolean algorithm that dealt with polygonal meshes&hellip; Adding a brush and removing it again would result in the same mesh, and thus wouldn&rsquo;t affect the performance! So, I looked into how to do 3D mesh booleans fast and robustly. I assumed it&rsquo;d be quite hard as they have a reputation of being fragile in most 3D software. Especially in edge cases, where you have two objects barely intersecting, the end result is usually broken. There are a few libraries, like CGAL, that can perform mesh booleans perfectly robustly, but they tend to be slow. I couldn&rsquo;t find an existing library that could do booleans/CSG fast and robustly, so I looked into how to do it myself.</p>
 <h2 id="first-attempt">First attempt</h2>
 <p>When trying to implement the booleans, I took inspiration from several papers, i.e. by <a href="https://arxiv.org/pdf/1308.4434.pdf">G. Mei &amp; J. Tipper</a>. Initially, I had an idea to use exact arithmetic using exact fractional numbers, where the numerator and denominator are both 64-bit integers as it&rsquo;d be easy to add, subtract, multiply, divide them and do comparisons exactly, as opposed to floats which are inexact and slowly but surely diverge from the true value. I soon learned that this rational number way is common practice to achieve robustness, but has the obvious flaw that when multiplied/divided a couple of times, the integers end up growing exponentially. Even though 64 bits seems big (it can hold the number of sand grains on earth!), due to chained multiplication, it&rsquo;s just not enough. Instead, the code must dynamically grow arrays for each integer as they grow bigger, but that also makes doing computations with them exceedingly expensive. In addition, the algorithms require calculating intersection points which require more information than the coordinates they were constructed from. To keep those exact coordinates around for future boolean operations, the information in the coordinates would get larger each time you would run the algorithm. Rounding them to a reasonable value range would result in loss of information, just like with floats.</p>
-<p>I decided to try making a boolean algorithm using floats and epsilons. The basic idea around most mesh boolean algorithms is to cut each polygon in mesh A by each polygon in mesh B, then for each formed subpolygon determine if it&rsquo;s inside mesh A and B, and based on those 2 inside/outside values and the boolean op (subtract/union/intersect), either discard it, keep it, or flip it. To make it efficient, some kinds of spatial data structures can be used, such as grids or octrees. I believe I got the algorithm quite close to being robust, but there were still edge cases where it would fail. It was then when I lost my faith in floats. Maybe with a different approach it could have still worked, but I just didn&rsquo;t believe I could do it. This video is from that version. Looking back at it, maybe I lost hope too soon - idk.</p>
+<p>I decided to try making a boolean algorithm using floats and epsilons. The basic idea around most mesh boolean algorithms is to cut each polygon in mesh A by each polygon in mesh B, then for each formed subpolygon determine if it&rsquo;s inside mesh A and B, and based on those 2 inside/outside values and the boolean op (subtract/union/intersect), either discard it, keep it, or flip it. To make it efficient, some kinds of spatial data structures can be used, such as grids or octrees. I believe I got the algorithm quite close to being robust, but there were still edge cases where it would fail. It was then when I lost my faith in floats. Maybe with a different approach it could have still worked, but I just didn&rsquo;t believe I could do it. In the video, it still works pretty well:</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/0d8rbbI6TLU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
@@ -167,7 +167,7 @@
   <iframe src="https://www.youtube.com/embed/KL-CCYU1Yo8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<p>Having these kinds of small overshoot errors could mess up the inside-outside detection part of the boolean algorithm. The EMBER paper doesn&rsquo;t have this issue as it uses larger, 256-bit coordinates and a more precise way of quantization and as a result it can share vertices exactly across faces. I was stubborn and wanted to try doing everything with 64-bit as I still felt like it should be doable and I figured it would really benefit the speed through reduced memory usage, and as I could use SIMD too. All of this made me think about more ways to go about the problem. I was looking into the possibility of <a href="https://users.cs.utah.edu/~ladislav/jacobson13robust/jacobson13robust.html">using tetrahedral meshes and winding numbers (A. Jacobson et al.)</a>, when I asked the question: there may be quantization errors, but why is it that it doesn&rsquo;t matter as much in some mesh representations like voxels or tetrahedral meshes, whereas with mine it&rsquo;s a deal breaker? It occurred to me that my boundary representation has too much information that can go out of sync with itself and become invalid. With, say a voxel bitmap, the solid/empty space is always unambiguously defined no matter how you tweak the values. This realization led me to investigate BSP trees further, as they seem to fit my problem the best. They were promising for another reason too. I thought it was cool how the method by Jacobson et al. could solve self-intersections. If I had that working in my editor, I could imagine moving a face/edge/vertex around and make things self-intersect, and to see a hole automatically appear in the place of the self-intersection. Wouldn&rsquo;t that be awesome?</p>
+<p>Having these kinds of small overshoot errors could mess up the inside-outside detection part of the boolean algorithm. The EMBER paper doesn&rsquo;t have this issue as it uses larger, 256-bit coordinates and a more precise way of quantization and as a result it can share vertices exactly across faces. I was stubborn and wanted to try doing everything with 64-bit as I still felt like it should be doable and I figured it would really benefit the speed through reduced memory usage, and as I could use SIMD too. All of this made me think about more ways to go about the problem. I was looking into the possibility of <a href="https://users.cs.utah.edu/~ladislav/jacobson13robust/jacobson13robust.html">using tetrahedral meshes and winding numbers (A. Jacobson et al.)</a>, when I asked the question: there may be quantization errors, but why is it that it doesn&rsquo;t matter as much in some mesh representations like voxels or tetrahedral meshes, whereas with mine it&rsquo;s a deal breaker? It occurred to me that my boundary representation has too much information that can go out of sync with itself and become invalid. With, say a voxel bitmap, the solid/empty space is always unambiguously defined no matter how you tweak the values. This realization led me to investigate BSP trees, as they have the same property. Using a volume-based representation was promising for another reason too. I thought it was cool how the method by Jacobson et al. could solve self-intersections. If I had that working in my editor, I could imagine moving a face/edge/vertex around and make things self-intersect, and to see a hole automatically appear in the place of the self-intersection. Wouldn&rsquo;t that be awesome?</p>
 <h2 id="using-bsp-trees">Using BSP trees</h2>
 <p>So once again, I made a new algorithm. This time, the idea was to have two functions: one to go from a BSP tree into a plane-based boundary mesh, and vice versa. In short, to perform a boolean, I&rsquo;d cut the BSP tree of mesh A by all of the faces of mesh B, and afterwards, per each sub-region of space in the cut BSP tree, determine if it&rsquo;s inside mesh A and B, and use the boolean op again to determine if the sub-region should end up solid or empty. Then, we could just convert the resulting BSP tree into a boundary mesh and render it directly! One nice thing about doing the round trip from BSP -&gt; boundary -&gt; BSP is that it automatically cleans up the BSP tree from redundant splits, assuming we deduplicate overlapping planes while doing it. And yes, I finally got it to work robustly!</p>
 <p>(also see the original video at the top)
@@ -184,7 +184,7 @@
   <iframe src="https://www.youtube.com/embed/_NOYwEfi6w4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<p>I&rsquo;ve rambled for long enough and there&rsquo;s just too many things to talk about, too many challenges. I finally feel like I&rsquo;m coming out on top, though there are still a lot of things to do and I have barely even gotten started with the whole editor itself. I&rsquo;ve decided to take a rest from this project for now to work on something a bit different, but I&rsquo;ll see you again soon, mesh booleans.</p><ul class="pa0">
+<p>I&rsquo;ve rambled for long enough and there&rsquo;s just too many things to talk about. I finally feel like I&rsquo;m coming out on top, though there are still a lot of things to do. I&rsquo;ve decided to take a rest from this project for now to work on something a bit different, but I&rsquo;ll see you again soon, mesh booleans.</p><ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">

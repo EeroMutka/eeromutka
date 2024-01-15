@@ -36,12 +36,12 @@ void spawn_explosion(GameWorld* world, const Vector3&amp;amp; explode_at, float 
     </item>
     
     <item>
-      <title>3D mesh boolean experiments</title>
+      <title>Experiments in Constructive Solid Geometry</title>
       <link>http://eeromutka.github.io/projects/csg_editor/</link>
       <pubDate>Sat, 20 May 2023 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/csg_editor/</guid>
-      <description>&lt;p&gt;I used to create 3D art a lot, and doing it has given me lots of ideas for a new kind of creation tool. It&amp;rsquo;s just begging to be made.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&amp;rsquo;ve documented the start of my journey to building this editor and the challenges I faced.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,7 +50,7 @@ void spawn_explosion(GameWorld* world, const Vector3&amp;amp; explode_at, float 
       <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
-      <description>One day I got annoyed at all the problems of C++ and the fact that there weren&amp;rsquo;t any good alternatives to it, and I decided to see if I could do something about it. I knew it would be difficult to make my own language, but I wasn&amp;rsquo;t entirely sure why: parsing code is easy, so why should making a low-level language be? Off I went, diving into the world of compilers to see how far I&amp;rsquo;d get.</description>
+      <description>&lt;p&gt;I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -68,8 +68,7 @@ void spawn_explosion(GameWorld* world, const Vector3&amp;amp; explode_at, float 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/art_portfolio/</guid>
-      <description>I&amp;rsquo;ve always liked art. I went to an art high school and was doing a lot of 3D art at the time. I learned about composition, lighting, 3D techniques and how to work with programs like Blender, Substance Painter &amp;amp; Designer, Zbrush and Unreal. I was on my way to becoming a game artist! Then I got really hooked with programming and it has become my main focus.
-I still take a lot of the knowledge with me to my programming projects.</description>
+      <description>I&amp;rsquo;ve always liked making art. I went to an art high school and was doing a lot of 3D art at the time. I learned about composition, lighting, 3D techniques and how to work with programs like Blender, Substance Painter &amp;amp; Designer, Zbrush and Unreal. I was on my way to becoming a game artist! Then I got really hooked with programming and it has since become my main focus.</description>
     </item>
     
     <item>
