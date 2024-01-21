@@ -5,51 +5,14 @@
     <link>http://eeromutka.github.io/projects/</link>
     <description>Recent content in Projects on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 02 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://eeromutka.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Rug Racers: Ultimate</title>
-      <link>http://eeromutka.github.io/projects/rug_racers/</link>
-      <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://eeromutka.github.io/projects/rug_racers/</guid>
-      <description>&amp;ldquo;Rug Racers: Ultimate&amp;rdquo; is an arcade flying-carpet racing game where you race against your friend on a physical carpet. I was the lead programmer responsible for making the engine, the input system and a lot of the gameplay code, and I also did a lot of game design. We were a 6-person team and made the game during a 10 week long school course. We won 2 awards at Gotland Game Conference, as well as got nominated at Swedish Game Awards!</description>
-    </item>
-    
-    <item>
-      <title>Mortal Shell</title>
-      <link>http://eeromutka.github.io/projects/mortal_shell/</link>
-      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://eeromutka.github.io/projects/mortal_shell/</guid>
-      <description>&lt;p&gt;Through a game-jam friend, I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. It&amp;rsquo;s a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Experiments in Constructive Solid Geometry</title>
-      <link>http://eeromutka.github.io/projects/csg_editor/</link>
-      <pubDate>Sat, 20 May 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://eeromutka.github.io/projects/csg_editor/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&amp;rsquo;ve documented the start of my journey to building this editor and the challenges I faced.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Building a compiler from scratch</title>
-      <link>http://eeromutka.github.io/projects/ffz_programming_language/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
-      <description>&lt;p&gt;I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.&lt;/p&gt;</description>
-    </item>
-    
+    <language>en-us</language><atom:link href="http://eeromutka.github.io/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bonus 2: Rocket League mods</title>
       <link>http://eeromutka.github.io/projects/rl_mods/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/rl_mods/</guid>
-      <description>&lt;p&gt;Rocket League is the best, no one can deny that. But what if you could also play volleyball in it? I made that possible! (among with other mods)&lt;/p&gt;</description>
+      <description>&lt;p&gt;Rocket League is super fun, but what if you could also play volleyball in it? I made that possible! (among with other mods)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,12 +25,57 @@
     </item>
     
     <item>
+      <title>Building a compiler from scratch</title>
+      <link>http://eeromutka.github.io/projects/ffz_programming_language/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
+      <description>&lt;p&gt;I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Experiments in Constructive Solid Geometry</title>
+      <link>http://eeromutka.github.io/projects/csg_editor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/csg_editor/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&amp;rsquo;ve documented the start of my journey to building this editor and the challenges I faced.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Game jam projects</title>
       <link>http://eeromutka.github.io/projects/game_jam_projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/game_jam_projects/</guid>
-      <description>&lt;p&gt;Game jams really got me hooked into game development when I first started out. I&amp;rsquo;ve participated in many game jams, both alone as well as in teams. Here are some fun highlights!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Game jams really got me hooked into game development when I first started out. I&amp;rsquo;ve participated in many game jams, both alone as well as in teams. Here are some fun highlights.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mortal Shell</title>
+      <link>http://eeromutka.github.io/projects/mortal_shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/mortal_shell/</guid>
+      <description>&lt;p&gt;Through a game-jam friend, I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. It&amp;rsquo;s a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Real time physically-based renderer &amp; GI</title>
+      <link>http://eeromutka.github.io/projects/renderer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/renderer/</guid>
+      <description>&lt;p&gt;The goal of this project was to combine all my learnings of shader and graphics programming into one unified renderer. I wanted to implement modern rendering techniques and add some of my own experiments on top, and to improve my understanding of Vulkan.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rug Racers: Ultimate</title>
+      <link>http://eeromutka.github.io/projects/rug_racers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/rug_racers/</guid>
+      <description>&amp;ldquo;Rug Racers: Ultimate&amp;rdquo; is an arcade flying-carpet racing game where you race against your friend on a physical carpet. I was the lead programmer responsible for making the core systems and a lot of the gameplay code, and I also did a lot of game design. We were a 6-person team and made the game during a 10 week long school course. The game won 2 awards at Gotland Game Conference, as well as got nominated at Swedish Game Awards!</description>
     </item>
     
   </channel>

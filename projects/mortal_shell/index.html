@@ -33,12 +33,12 @@
 <meta property="og:description" content="Bring the glands back to me..." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://eeromutka.github.io/projects/mortal_shell/" /><meta property="article:section" content="projects" />
-<meta property="article:published_time" content="2023-07-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-07-01T00:00:00+00:00" />
+
+
 <meta itemprop="name" content="Mortal Shell">
-<meta itemprop="description" content="Bring the glands back to me..."><meta itemprop="datePublished" content="2023-07-01T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-07-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="539">
+<meta itemprop="description" content="Bring the glands back to me...">
+
+<meta itemprop="wordCount" content="615">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mortal Shell"/>
 <meta name="twitter:description" content="Bring the glands back to me..."/>
@@ -135,8 +135,6 @@
       
       
       
-      <time class="f6 mv4 dib tracked" datetime="2023-07-01T00:00:00Z">July 1, 2023</time>
-      
 
       
       
@@ -146,15 +144,15 @@
   <iframe src="https://www.youtube.com/embed/r16Dc_jMWzA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<p>I was sort of a generalist on the team, implementing and refining a lot of gameplay elements and environmental objects using Unreal Engine 4&rsquo;s blueprints. I would do a lot of polishing and bugfixing in many different areas of the game. I might have gotten a task, such as &ldquo;The cathedral level needs a gate that gets unlocked by finding 3 different levers.&rdquo; I would then do my best to make it as polished as possible, with animation curves, utilizing existing sounds and particles and passing around ideas with the team. The core team was pretty small with only 15 people, so I got quite a bit of artistic freedom with the tasks.</p>
+<p>I was sort of a generalist on the team, implementing and refining a lot of gameplay elements and environmental objects using Unreal Engine 4&rsquo;s blueprints. I did a lot of polishing and bugfixing in many different areas of the game. I might have gotten a task, such as &ldquo;The cathedral level needs a gate that gets unlocked by finding 3 different levers.&rdquo; I would then do my best to make it as polished as possible, with animation curves, utilizing existing sounds and particles and passing around ideas with the team. The core team was pretty small with only 15 people, so I got a lot of artistic freedom with the tasks.</p>
 <p>An example of a mechanic I made is the big radial waves that the final boss in the game creates, as seen in the video (4:18)
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/_x_g0NE_mWE?start=258" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
-<p>Unless you dash through the wave or turn into stone as in the video, you get knocked down by it. I&rsquo;m using a sine-wave as the function to calculate the height of the wave, in both the shader to offset the vertices and to generate the mask for switching to a different wave texture, as well as in the gameplay code to check if the player has been in the wave for long enough to get knocked down. If you get knocked down (in the video after the first wave), an animation montage plays out that I combined from multiple animations where you roll on the water and rise back up. I was really happy with how it felt to play!</p>
-<p>I also need to mention the bear trap. When I joined the project, you could randomly get bitten by an almost invisible bear trap. They felt bad and I talked to the director about it. He agreed and was contemplating removing them, but I saw potential and took on the task to remake them and balance them in the level so they feel fair. The goal is to troll the player a little, and to make them keep track of another danger that lurks in the hostile world. It&rsquo;s a risky mechanic that people will hate, but hopefully still think: &ldquo;I&rsquo;m so dumb&rdquo;, while they wait for the teeth to open again.</p>
+<p>A big spreading wave is spawned when The Unchained slams into the water. I created this effect by spawning a tesselated plane with a special material for the duration of the wave. The material is using a simple sine function as a function of time and distance from the origin to calculate a world position offset value for the vertices, and to control the opaqueness. I also added a foam effect to the material by using textures, and spawned foam particle systems whenever the player goes through the wave. The wave is supposed to knock the player down on impact, unless if they dash through it or turn into stone form as in the video. To check for wave collision, I added a wave-height function into the wave blueprint that matches the one in the material that can then be called every frame. The wave shouldn&rsquo;t instantly knock down the player, so I also added a time-spent-in-wave threshold to it. If the player gets knocked down (see 4:30 in the video), an animation montage plays out that I combined from multiple animations where they roll on the water and rise back up. I was happy with how it all felt with everything combined!</p>
+<p>I also need to mention the bear trap. When I joined the project, you could randomly get bitten by an almost invisible bear trap. They felt bad and I talked to the director about it. He agreed and was contemplating removing them, but I saw potential and took on the task to remake them and balance them in the level so they feel fair. The goal is to troll the player a little, and to make them keep track of another danger that lurks in the hostile world. It&rsquo;s a risky mechanic and if taken too far, people will hate, so it was important to balance it well.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/9r2x4vcJV_k?start=51" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
