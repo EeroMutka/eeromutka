@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Building a compiler from scratch | </title>
+    <title>Building a Compiler | </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.">
+    <meta name="description" content="I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.">
     <meta name="generator" content="Hugo 0.112.6">
     
     
@@ -29,19 +29,19 @@
 
     
     
-    <meta property="og:title" content="Building a compiler from scratch" />
-<meta property="og:description" content="I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable." />
+    <meta property="og:title" content="Building a Compiler" />
+<meta property="og:description" content="I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://eeromutka.github.io/projects/ffz_programming_language/" /><meta property="article:section" content="projects" />
 
 
-<meta itemprop="name" content="Building a compiler from scratch">
-<meta itemprop="description" content="I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.">
+<meta itemprop="name" content="Building a Compiler">
+<meta itemprop="description" content="I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.">
 
-<meta itemprop="wordCount" content="2124">
+<meta itemprop="wordCount" content="1941">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Building a compiler from scratch"/>
-<meta name="twitter:description" content="I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable."/>
+<meta name="twitter:title" content="Building a Compiler"/>
+<meta name="twitter:description" content="I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable."/>
 
 	
   </head>
@@ -93,7 +93,7 @@
 
       <div class="tc-l pv6 ph3 ph4-ns">
         
-          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Building a compiler from scratch</div>
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Building a Compiler</div>
           
         
       </div>
@@ -127,7 +127,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">Building a compiler from scratch</h1>
+      <h1 class="f1 athelas mt3 mb1">Building a Compiler</h1>
       
       
       
@@ -135,8 +135,8 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.</p>
-<p>I&rsquo;ll preface this with some of the problems I saw with C++ that gave motivation for this project. A big one is how complicated it is. Everyone has to pick a subset of features to use, and the larger the subset, the less people can easily follow it. Coding styles often follow this complexity: if you&rsquo;ve gotten a long cryptic error message from <code>std::</code> template code, you know what I mean. Building other people&rsquo;s code and integrating libraries can also be difficult. Then there are things inherited from C, like order-dependent declarations and the fact that you can&rsquo;t return <code>float[3]</code> from a function. Still, the big motivation for this project was that, if the language was simpler and had a modular compiler library, it would allow for making new kinds of tools and ways to use it, e.g. embedding into a game engine in an interactive way.</p>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.</p>
+<p>The motivation for this project came from multiple places. One was that I wished there existed a nice, simpler C/C++ alternative. C++ is very complicated. Everyone has to pick a subset of features to use, and the larger the subset, the less people can easily follow it. Coding styles often follow this complexity: if you&rsquo;ve gotten a long cryptic error message from <code>std::</code> template code, you know what I mean. Building other people&rsquo;s code and integrating libraries can also be a pain. Although simpler, C has its rough edges too, like its order-dependent declarations, the fact that you can&rsquo;t just return <code>float[3]</code> from a function, and that you can&rsquo;t easily make reusable code modules without starting to put prefixes to all names. There are just a lot of things that could be improved. Still, the main motivation for this project was the idea of having the compiler be an easy-to-use, modular library. It would allow for interesting ways to code, e.g. allow for extending the language by the user or to allow for plugging it into new kinds of interactive programming tools, like a visual scripting system in a game engine.</p>
 <p>So, how can I build my own little C/C++? I want my language to read text files and transform them into the magical .exe file that can be run by the computer. Let&rsquo;s start from the end, the executable file. The executable file depends on the OS, but it wouldn’t be too difficult to generate it myself. However, if I wanted to be able to use code made in other languages like C++ in my language, it’d be useful to use a linker. The job of a linker is to take in other magical files called object files (or static library files, AFAIK they’re kind of the same thing), and output the executable file. This way, I could compile code in other programming languages into object / static library files, generate an object file from my programming language, and link them together into an executable file using the OS-provided linker.</p>
 <p>When I looked into generating object files, I found <a href="https://wiki.osdev.org/COFF">this wiki page</a> helpful. An object file contains the compiled machine code that the target processor can execute. It’s basically a list of instructions for the specific processor kind (in my case X64), for each function. An instruction can for example add two values together or store a value into memory. Generating all of this is a bit complicated, especially since the object file format varies per operating system, and given that there are more processor architectures than just X64. There is one popular library that handles this, though, which is LLVM. A lot of compilers use it since it can output to lots of different target architectures and platforms and it can do advanced transformations that optimize the code to run efficiently. But from what I have heard and seen, it&rsquo;s a complicated beast with millions of lines of code and it&rsquo;s also very slow to run. I knew this from the start, which was the reason for why I dug into how I might generate these files myself. I want my language to be a joy to use, and part of that is having quick iteration times.</p>
 <p>We could of course skip all of this difficulty and just generate source code for another programming language like C, and use their compiler as a second step. This is easy, and we will even get optimizations for free! But it will take longer to compile. And perhaps the biggest problem with this is the story of debugging. If you wanted to then debug your code, you&rsquo;d be debugging an unreadable mess of generated C code. If we generate the object files directly, we can generate the debug information too just like the C compiler would, and use a debugger like Visual Studio to debug the code written in our language.</p>
@@ -190,8 +190,8 @@
   <iframe src="https://www.youtube.com/embed/kfbfswcj2wI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
-<p>Note how I can inspect the values of local variables, hop around the call stack, and even step into foreign code.</p>
-<p>The language design isn’t too fancy, but that’s the goal. There are still some cool things about FFZ that I&rsquo;ve already implemented:</p>
+<p>Note how I can inspect the values of local variables, hop around the call stack, and even step into foreign code!</p>
+<p>The language design isn’t too fancy, but there are still some cool things about that I implemented:</p>
 <ul>
 <li>out of order declarations</li>
 <li>modules with name-prefixing</li>
@@ -200,10 +200,9 @@
 <li>intuitive error messages</li>
 <li>parametric polymorphism, i.e. ability to implement a generic Array type</li>
 </ul>
-<p>The biggest reason I’m excited about this project is making it into an modular library. I want it to be easy to inspect and modify the code you write. What if I wanted to make the compiler automatically insert profiling code in every function entry and exit points? Or maybe I want to inspect all the struct definitions so that I can automatically generate a user interface for it. I can imagine a lot of ways how having full control over the compiler could be really useful.</p>
-<p>Exposing this kind of functionality shouldn’t be too difficult, but most compilers don&rsquo;t allow it. Clang/LLVM is the only major compiler that does, but the inherent complexity of C++ limits how productive you can be with writing your own tools for it. Some newer languages, like Jai, also provide built-in metaprogramming features, but I feel like adding these kinds of features into the language itself is the wrong choice. It complicates the compiler, adds problems/questions like how pointers should behave during compile-time, and makes it impossible to step through the metaprogram in a debugger. Instead, I believe the compiler should just be a library. I love libraries like stb-image that just give you a stupid simple interface to do the work that you want, and I want to try to do that for FFZ too.</p>
 <p>A challenge has been to decide which features I should add to the language. There are lots of useful features I can imagine I would want, but at the same time, I want the language to remain simple to implement and to understand, and I don&rsquo;t want to drown in work. I don&rsquo;t know if there are any right or wrong answers, I&rsquo;ve mostly gone based on what feels right.</p>
-<p>At the time of writing, the language is quite functional, but still incomplete. My goal was to finish it as quickly as possible and start using it for other projects. For now, I&rsquo;ve benched it as there are other cool projects I want to work on that I think are more rewarding compared to staring at bits all day. It would also be a lot to take on at once to work a real project using an incomplete programming language that might contain bugs that need to be fixed. On top of that, I&rsquo;m not the only one who&rsquo;s making progress in the field: work is being done towards an <a href="https://github.com/RealNeGate/Cuik">LLVM alternative</a>, which I&rsquo;m excited for as it&rsquo;s definitely the most difficult part of this puzzle. Hopefully that project will keep maturing and I could use it in the future. In the meanwhile, I&rsquo;m going back to C/C++ to work on other projects. All in all, this has been a fun project that has taught me a lot about programming and how computers work.</p><ul class="pa0">
+<p>At the time of writing, the language is quite functional, but still incomplete. My goal was to finish it as quickly as possible and start using it for other projects. For now, I&rsquo;ve benched it as there are other cool projects I want to work on. It would be a lot to take on at once to work a real project using an incomplete programming language that might contain bugs that need to be fixed. On top of that, I&rsquo;m not the only one who&rsquo;s making progress in the field: work is being done towards an <a href="https://github.com/RealNeGate/Cuik">LLVM alternative</a>, which I&rsquo;m excited for as it&rsquo;s definitely the most difficult part of this puzzle. Hopefully that project will keep maturing and I could use it in the future. In the meanwhile, I&rsquo;m going back to C/C++ to work on other projects. Still, this has been a fun journey that has taught me a lot about programming and how computers work.</p>
+<p>You can find the code for the FFZ compiler and GMMC at <a href="https://github.com/EeroMutka/ffz">https://github.com/EeroMutka/ffz</a>.</p><ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">

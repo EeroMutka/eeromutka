@@ -25,12 +25,12 @@
     </item>
     
     <item>
-      <title>Building a compiler from scratch</title>
+      <title>Building a Compiler</title>
       <link>http://eeromutka.github.io/projects/ffz_programming_language/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/ffz_programming_language/</guid>
-      <description>&lt;p&gt;I made a small programming language for game programming, and as a way to learn more about how compilers work. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I wrote a compiler for a simple programming language I designed to learn more about compilers and to see how far I&amp;rsquo;d get. Here I describe my process of creating it and what is required to take a text file and to turn it into an executable.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,12 +52,21 @@
     </item>
     
     <item>
+      <title>Immediate Mode UI Library</title>
+      <link>http://eeromutka.github.io/projects/immediate_mode_ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://eeromutka.github.io/projects/immediate_mode_ui/</guid>
+      <description>&lt;p&gt;Over time, I&amp;rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&amp;rsquo;s implemented.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Mortal Shell</title>
       <link>http://eeromutka.github.io/projects/mortal_shell/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://eeromutka.github.io/projects/mortal_shell/</guid>
-      <description>&lt;p&gt;Through a game-jam friend, I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. It&amp;rsquo;s a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I got the opportunity to work on &amp;ldquo;Mortal Shell&amp;rdquo; as a gameplay programmer and designer. Mortal Shell is a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.&lt;/p&gt;</description>
     </item>
     
     <item>
