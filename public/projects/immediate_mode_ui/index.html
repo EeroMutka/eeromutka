@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Immediate Mode UI Library | </title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Over time, I&rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&rsquo;s implemented.">
+    <meta name="generator" content="Hugo 0.112.6">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Immediate Mode UI Library" />
+<meta property="og:description" content="Over time, I&rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&rsquo;s implemented." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://eeromutka.github.io/projects/immediate_mode_ui/" /><meta property="article:section" content="projects" />
+
+
+<meta itemprop="name" content="Immediate Mode UI Library">
+<meta itemprop="description" content="Over time, I&rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&rsquo;s implemented.">
+
+<meta itemprop="wordCount" content="1412">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Immediate Mode UI Library"/>
+<meta name="twitter:description" content="Over time, I&rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&rsquo;s implemented."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('/projects/immediate_mode_ui/ui_banner.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/" title="Portfolio page">
+              Portfolio
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/contact/" title="Contact me page">
+              Contact me
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Immediate Mode UI Library</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Immediate Mode UI Library</h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>Over time, I&rsquo;ve built up a library to easily make user interfaces in my projects. This is a small showcase of it and a description of how it&rsquo;s implemented.</p>
+<p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/f_GKB4jV1Cs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<em>Showcase of some of the UI features I&rsquo;ve implemented</em></p>
+<p>When I started out making projects with C++, I used the <a href="https://github.com/ocornut/imgui">Dear Imgui</a> library. It&rsquo;s a joy to use thanks to its immediate-mode API where you rebuild the UI every frame. Soon it became clear that I wanted more control and wanted to build something similar on my own.</p>
+<p>My other projects have been the driving force for requiring UI, and as such I&rsquo;ve been building the UI code slowly over time and it has went through a lot of iteration. It&rsquo;s pretty easy to get started with UIs by just drawing some rectangles and detecting if the mouse is inside them, but when I started adding a layout system for convenience and more controls on top, the system easily became tangled with interdependencies that made building more complicated UIs difficult. Keeping the system simple and extendable has been the main challenge, and it wasn&rsquo;t obvious to me in the beginning how to do that.</p>
+<h2 id="implementation">Implementation</h2>
+<p>The basic idea of immediate-mode UIs is to rebuild the entire user interface every frame. The classic alternative to this is retained-mode UIs, where the UI library defines a hierarchy of unique widget types, typically as a C++ class hierarchy. In retained mode UIs, the user is responsible for then creating and managing these objects and sending events between them, such as &ldquo;add a child widget to a menu&rdquo; or &ldquo;attach on-pressed callback for this button&rdquo;. Immediate-mode style is a lot more convenient, because it doesn&rsquo;t require the user to manage extra state explicitly; instead, the user can generate the UI directly from their own internal program state in one pure data transformation. A great source of inspiration has been Ryan Fleury&rsquo;s <a href="https://www.rfleury.com/p/ui-series-table-of-contents">UI articles</a>. The articles present interesting ideas about ways to structure code in the context of UIs, and helped me implement more composable code.</p>
+<p>As the basis of my UI system, you build up hierarchical trees of &ldquo;UI boxes&rdquo; that get placed one after another vertically or horizontally. A box is just a rectangle with a group of behaviours, such as &ldquo;has text&rdquo;, &ldquo;draw border&rdquo;, &ldquo;add padding to child boxes&rdquo;, and so on. So, for example, adding a button to the UI might be a call to an &ldquo;Add Box&rdquo; function with the behaviours &ldquo;has text&rdquo;, &ldquo;clickable&rdquo;, &ldquo;draw border&rdquo; and &ldquo;draw solid color&rdquo;. The main benefit of having a tree structure is the convenient layout and sizing system. When adding a box, you specify a width and a height, each containing a few parameters which define how big of a size the box will be given. You can specify a size in pixels, or as a &ldquo;minimal fit&rdquo;, or as &ldquo;flex, taking as much free space as possible&rdquo;. The UI then has a function to compute all the rectangles for the box tree when the tree has been generated by the user. Another advantage of this structure is is that the UI system will know the relationships of these boxes and can use it to implement keyboard navigation that requires no extra work by the user.</p>
+<h2 id="generating-unique-keys">Generating Unique Keys</h2>
+<p>Another common trope of immediate-mode UIs is that they give back information about user-interaction <em>immediately</em> when you&rsquo;re building the UI. For example, in Dear Imgui you can call <code>ImGui::Button()</code>, which returns a boolean that says if it has been pressed. It means that code which is logically related to that button can be implemented right then and there, which is nice. However, my UI system performs smart layouting which means that when adding a box to the tree, its rectangle cannot be calculated yet, because its size may depend on the sizes of other boxes in the tree which may not have been added yet. And so, which rectangle can we even check against when figuring out if a box has been pressed? The trick is to give each UI box an unique &ldquo;key&rdquo; that identifies it across frames. This can be calculated using many ways, for example by hashing the button text, as Dear Imgui does. I have a slightly different method which I&rsquo;ll explain shortly. But so, if we store some data from the previous frame, such as the rectangles of all boxes, we can look up the rectangle of the box from the previous frame using this unique key and use that to check for mouse overlap! For UI elements which don&rsquo;t move across frames, there won&rsquo;t be any extra frame of latency with this method. If you do have lots of fast moving UI elements that need clicking&hellip; there may be bigger UI issues to fix first.</p>
+<p>A nice way to implement caching for the previous frame (and to manage memory in general) is to use <a href="https://www.gingerbill.org/article/2019/02/08/memory-allocation-strategies-002/">arenas</a>. My UI system currently stores the entire UI tree of the previous frame, so we have a lot of data at our hands if needed. The way to do this efficiently with arenas is to have two of them: on frame 1, build the UI tree on arena A, then on frame 2 build the UI tree on arena B and use arena A as the previous frame&rsquo;s cache, then continue switching between the two arenas. At each frame, we also build a hash map from key -&gt; box pointer, which stores the box data for that particular frame and pointers to its related nodes in the tree (prev/next/parent/children). The approach I took for coming up with unique keys for the boxes is to let the user do it, but to provide helpful macros for it. You can call <code>UI_KEY()</code>, which gives you an unique key for that particular macro usage site, and is enough in a lot of cases. You can also hash keys together, i.e. <code>UI_KEY1(key_a)</code> or <code>UI_KEY2(key_a, key_b)</code>, which both generate a unique key taking other keys and the macro usage site into account. You may also hash your own data such as integers into keys to make new keys. If the same key appears twice during a frame, I assert to let the user know they messed up. This method has worked really well for me.</p>
+<h2 id="drawing">Drawing</h2>
+<p>The second part of the UI system is the drawing code. I really like how Dear Imgui has an easy-to-use API for drawing functions like &ldquo;Add Rectangle&rdquo;, &ldquo;Add Circle&rdquo;, &ldquo;Add Text&rdquo;, and so on. I wanted to follow a similar route. From a high level view, after the rectangles have been generated for a tree, the user can call &ldquo;Draw Box&rdquo; on the tree root box, which will recursively call these drawing functions for each box. The user can also call these drawing functions directly at any point if they want to hand-roll some UI code and to bypass the box tree system altogether. Having every possible behaviour and layouting option imaginable in the box tree system isn&rsquo;t realistic (or desirable), so being able to opt out of it is nice.</p>
+<p>How the drawing functions are implemented has also gone through some iteration. At one point I was following a similar system to Ryan&rsquo;s, where rectangles are submitted to the GPU and then rendered using signed distance functions with parameters for edge roundness, softness, thickness, etc. I also defined a few other shapes like circles. I then decided to scrap it in favour of Dear Imgui-style rendering, where you submit a dumb vertex buffer, where each vertex has a position and a color and optionally a texture. This approach is more limiting and means that you have to generate the geometry on the CPU, but because of this it&rsquo;s also more flexible. It means that the user can look at the provided drawing functions, copy code from it, make variations, and do whatever they like, all without looking at or touching any shader code. This is nice, because similarly to Dear IMGUI, I want it to be easy to swap rendering backends or to provide your own.</p>
+<p>I&rsquo;ve named the library Fire UI and <a href="https://github.com/EeroMutka/Fire">here&rsquo;s a link to its source code</a>. You can also find the UI demo program in the repository and try it out yourself!</p>
+<p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/UjjCEtLgICU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<em>A short peek into my most recent project, the Hatch Level Editor. You can see some script hotreloading in action, as well as me fiddling around in the log window, because I was happy I implemented 2-way scrollbars</em></p><ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://eeromutka.github.io/" >
+    &copy; 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
