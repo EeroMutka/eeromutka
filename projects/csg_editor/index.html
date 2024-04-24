@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Experiments in Constructive Solid Geometry | </title>
+    <title>Experiments with Constructive Solid Geometry | </title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced.">
+    <meta name="description" content="An exploration into constructive solid geometry techniques with the goal of making new kinds of level design &amp; 3D art tools.">
     <meta name="generator" content="Hugo 0.112.6">
     
     
@@ -29,19 +29,19 @@
 
     
     
-    <meta property="og:title" content="Experiments in Constructive Solid Geometry" />
-<meta property="og:description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced." />
+    <meta property="og:title" content="Experiments with Constructive Solid Geometry" />
+<meta property="og:description" content="An exploration into constructive solid geometry techniques with the goal of making new kinds of level design &amp; 3D art tools." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://eeromutka.github.io/projects/csg_editor/" /><meta property="article:section" content="projects" />
 
 
-<meta itemprop="name" content="Experiments in Constructive Solid Geometry">
-<meta itemprop="description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced.">
+<meta itemprop="name" content="Experiments with Constructive Solid Geometry">
+<meta itemprop="description" content="An exploration into constructive solid geometry techniques with the goal of making new kinds of level design &amp; 3D art tools.">
 
-<meta itemprop="wordCount" content="2140">
+<meta itemprop="wordCount" content="1234">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Experiments in Constructive Solid Geometry"/>
-<meta name="twitter:description" content="I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced."/>
+<meta name="twitter:title" content="Experiments with Constructive Solid Geometry"/>
+<meta name="twitter:description" content="An exploration into constructive solid geometry techniques with the goal of making new kinds of level design &amp; 3D art tools."/>
 
 	
   </head>
@@ -93,7 +93,7 @@
 
       <div class="tc-l pv6 ph3 ph4-ns">
         
-          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Experiments in Constructive Solid Geometry</div>
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Experiments with Constructive Solid Geometry</div>
           
         
       </div>
@@ -127,7 +127,7 @@
   </div>
 
 
-      <h1 class="f1 athelas mt3 mb1">Experiments in Constructive Solid Geometry</h1>
+      <h1 class="f1 athelas mt3 mb1">Experiments with Constructive Solid Geometry</h1>
       
       
       
@@ -135,54 +135,48 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I&rsquo;ve had lots of ideas floating around for a new kind of 3D level design / art tool that would be fun to use. This led me to learning about CSG and how it can be really tricky. Here I&rsquo;ve documented the start of my journey to building this editor and the challenges I faced.</p>
-<p>Sneak peak:
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>An exploration into constructive solid geometry techniques with the goal of making new kinds of level design &amp; 3D art tools.</p>
+<p>I&rsquo;ve been exploring techniques for implementing efficient and exact CSG operations. CSG operations allow you to create and cut geometry in an intuitive way. Here&rsquo;s one of my experiments where you can see the cutting in action:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/kCL9DabX_wk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 </p>
-<h1 id="the-process">The process</h1>
-<p>A big inspiration for me was Media Molecule&rsquo;s Dreams, its 3D editor and their idea of <a href="https://youtu.be/DpSWMQgBpHI">&ldquo;sensitive tools&rdquo;</a>. The way they are using brushes to cut and build form in complicated ways with just simple and intuitive tools is really inspiring. It encourages playfulness and experimentation in a way that is missing from polygon-based 3D modeling programs.</p>
-<p><a href="https://youtu.be/u9KNtnCZDMI">The Dreams tech (Alex Evans, 2015)</a> uses lists of signed distance functions to represent geometry that go into a hierarchical voxel-splitting compute shader to generate point cloud clusters that get rendered by stochastically splatting them to the screen as textured quads using more compute shaders &hellip; Or something like that.</p>
-<p>Signed distance functions are a promising trend for volumetric modeling. They are nice and simple, but they have the problem of how to render them - when the SDF becomes complicated with lots brushes, using naive raymarching gets more and more expensive. Dreams manages to make SDFs work with its hierarchical evaluator, though its speed still scales linearly with the number of brushes. Ideally, adding a brush somewhere and then immediately cutting it with another brush shouldn&rsquo;t affect the speed of the algorithm.</p>
-<p>An alternative of raymarching SDFs directly is to convert them to surface mesh and render them traditionally. This would be great for my editor, as it&rsquo;d make it easy to import and export models to/from other programs and asset stores. But doing the convertion quickly is a challenge. Alex Evans went through different experiments of this in his talk, and the best option seems to be to use something like marching cubes with a really dense grid, and then decimate the mesh to bring it down to a reasonable triangle density. But that would be too slow.</p>
-<p>If only there was a really fast mesh boolean algorithm that dealt with polygonal meshes&hellip; Adding a brush and removing it again would result in the same mesh, and thus wouldn&rsquo;t affect the performance! So, I looked into how to do 3D mesh booleans fast and robustly. I assumed it&rsquo;d be quite hard as they have a reputation of being fragile in most 3D software. Especially in edge cases, where you have two objects barely intersecting, the end result is usually broken. There are a few libraries, like CGAL, that can perform mesh booleans perfectly robustly, but they tend to be slow. I couldn&rsquo;t find an existing library that could do booleans/CSG fast and robustly, so I looked into how to do it myself.</p>
-<h2 id="first-attempt">First attempt</h2>
-<p>When trying to implement the booleans, I took inspiration from several papers, i.e. by <a href="https://arxiv.org/pdf/1308.4434.pdf">G. Mei &amp; J. Tipper</a>. Initially, I had an idea to use exact arithmetic using exact fractional numbers, where the numerator and denominator are both 64-bit integers as it&rsquo;d be easy to add, subtract, multiply, divide them and do comparisons exactly, as opposed to floats which are inexact and slowly but surely diverge from the true value. I soon learned that this rational number way is common practice to achieve robustness, but has the obvious flaw that when multiplied/divided a couple of times, the integers end up growing exponentially. Even though 64 bits seems big (it can hold the number of sand grains on earth!), due to chained multiplication, it&rsquo;s just not enough. Instead, the code must dynamically grow arrays for each integer as they grow bigger, but that also makes doing computations with them exceedingly expensive. In addition, the algorithms require calculating intersection points which require more information than the coordinates they were constructed from. To keep those exact coordinates around for future boolean operations, the information in the coordinates would get larger each time you would run the algorithm. Rounding them to a reasonable value range would result in loss of information, just like with floats.</p>
-<p>I decided to try making a boolean algorithm using floats and epsilons. The basic idea around most mesh boolean algorithms is to cut each polygon in mesh A by each polygon in mesh B, then for each formed subpolygon determine if it&rsquo;s inside mesh A and B, and based on those 2 inside/outside values and the boolean op (subtract/union/intersect), either discard it, keep it, or flip it. To make it efficient, some kinds of spatial data structures can be used, such as grids or octrees. I believe I got the algorithm quite close to being robust, but there were still edge cases where it would fail. It was then when I lost my faith in floats. Maybe with a different approach it could have still worked, but I just didn&rsquo;t believe I could do it. In the video, it still works pretty well:</p>
-
+<p>The motivation for this project came from ideas I had for a new kind of 3D modeling tool. Having CSG / mesh boolean operations as the basic editing operations in a 3D editor seemed like a good idea, as they&rsquo;re really intuitive and easily compose into more complicated shapes. The sculpting tools of <a href="https://youtu.be/v27LZivpffQ">Dreams</a> were a big inspiration to me, and their idea of <a href="https://youtu.be/DpSWMQgBpHI">sensitive tools</a>.</p>
+<p>The approach Dreams uses for implementing adding/cutting operations is to use signed distance functions. SDFs are nice and simple to implement, but when the list of shapes gets large, rendering it naively with ray marching would be too expensive to do in real time. Dreams has an advanced system to hierarchically convert from the SDFs into point clouds using compute shaders and a special rendering pipeline to draw them. However, I wanted to stay in the realm of triangle meshes, as that&rsquo;s what game engines typically work with and my goal wasn&rsquo;t to have the painterly art style of dreams which would require very special rendering techniques.</p>
+<p>One option would be to convert from an SDF into a triangle mesh using marching cubes, dual contoring, or similar. Alex Evans goes through various approaches for this in his <a href="https://youtu.be/u9KNtnCZDMI">Dreams R&amp;D talk</a>. The problem is that the resulting mesh needs to be really dense to keep the geometric detail, making it slow to generate and to render. The generation time is also linearly proportional to the SDF complexity, so over time editing would become slower and slower. My goal is to have a very fast algorithm to let users edit shapes in real-time and see the boolean results immediately (no matter how long they work on their model), so meshing SDFs didn&rsquo;t seem like the best alternative.</p>
+<p>My best option seemed to be to look into 3D mesh boolean &amp; CSG algorithms. I braced myself assuming it would be quite hard as they have a reputation of being fragile in most 3D software. Especially in edge cases with shapes barely touching, things often break. There are some libraries that can perform mesh booleans perfectly robustly, but they seemed too slow for real-time editing, so I chose to dive deeper into this problem myself. I was also just curious!</p>
+<h2 id="initial-attempt">Initial attempt</h2>
+<p>I took inspiration from a few papers, i.e. <a href="https://arxiv.org/pdf/1308.4434.pdf">Simple and Robust Boolean Operations for
+Triangulated Surfaces</a>. I initially had the idea to use exact integer arithmetic, where a fractional number would be stored as two 64-bit integers. Integers would guarantee robustness, as opposed to floats which introduce small errors that could break the algorithm in edge cases. The problem with exact arithmetic is that when multiplying two numbers, the number of bits required for storing the value doubles. The algorithms often require using dot products, determinants or similar, which could bloat up the coordinates, making computations more expensive after each operation. Instead, I decided to try making an algorithm using floats and a careful use of epsilons.</p>
+<p>The basic idea of most mesh boolean algorithms is to cut each polygon in mesh A by each polygon in mesh B, then for each formed subpolygon determine if it&rsquo;s inside mesh A and B, and based on those 2 inside/outside values and the boolean op (subtract/union/intersect), either discard it, keep it, or flip it. I learned about the half-edge data structure, which was useful for traversing the mesh in various ways, as well as to insert edges/vertices/etc. To make the algorithm efficient when looking for intersection pairs and for ray-casting (inside-outside detection), a spatial data structure can be used, such as a grid or an octree. I got the algorithm to be quite robust, but there were still some failure cases which I failed to get rid of. Maybe with slight changes to the algorithm, I could have made it work robustly, but with my knowledge back then I didn&rsquo;t believe so.</p>
+<p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/0d8rbbI6TLU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
+<em>Box &amp; box intersection using floats. It still appears to work pretty well.</em></p>
 <h2 id="second-attempt">Second attempt</h2>
-<p>I took a break from the project to work on other things, but recently returned to it with a fresh mind. I once again looked at the research and to see if there was a way to avoid inexact computations / floats while being fast. I found some more papers that seemed promising, <a href="https://www.vci.rwth-aachen.de/publication/03339/">such as EMBER (J. Nehring-Wirxel et al.)</a> and I wanted to implement some of the ideas. One particularly brilliant idea I learned about from <a href="https://arxiv.org/abs/2103.02486">a previous paper by the same authors</a> is the use of plane-based geometry. The idea is to represent all geometry using planes, where a plane is defined as the four 64-bit integer coefficients <code>A, B, C, D</code> of the plane equation <code>Ax + By + Cz + D = 0</code>. Even though integers are used, a plane can still lie anywhere in space: by using big coefficients, the plane can be moved even in tiny increments. Edges are represented as the intersection of two planes, points by the intersection of three planes, and (convex) polygons by a supporting plane and a list of edge planes. Everything uses planes! A nice property about boolean operations is that the result of a boolean is fully made up of polygons from either of its input meshes, possibly flipped or cut by each other&rsquo;s planes. And so, with our plane-based representation, it&rsquo;s possible to represent the resulting mesh using only the original planes from the two input meshes. That&rsquo;s fantastic, as it means that we can keep applying boolean operations as many times as we want, and the numerical information does not need to grow, meaning we can easily keep it all exact.</p>
-<p>The paper also explains how all we really need to implement a boolean operation is to be able to ask which side a point is to a plane, and an efficient way to compute that exactly as a function that takes in 4 planes, 3 for the point and 1 for the plane. I started studying the EMBER paper and implementing an algorithm based on it. I tried to make it possible to import meshes from blender to test my algorithm, but I ran into troubles. When importing a mesh, I&rsquo;d have to convert it to a version using quantized planes. My idea was to round the faces into 64-bit quantized planes while losing some precision in the process, and to use the neighbouring face planes as the edge planes to avoid getting holes due to this slight error. I encountered two issues: firstly, the edge plane would be invalid if the neighbouring face were coplanar with the other face, since it couldn&rsquo;t be used together with the face plane to define an edge as it was coplanar with it. Secondly, vertices with more than 3 touching faces would also be problematic due to an &ldquo;overshooting corner&rdquo; effect as shown in the following video. Two faces always perfectly shared an edge like I intended, but I didn&rsquo;t realize that overshooting corners could still appear.</p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/KL-CCYU1Yo8" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<p>Having these kinds of small overshoot errors could mess up the inside-outside detection part of the boolean algorithm. The EMBER paper doesn&rsquo;t have this issue as it uses larger, 256-bit coordinates and derives them losslessly from input mesh vertices. I was using 64-bit coordinates, as I figured 64 bits should be enough for even very high precision planes with large possible ranges. Coming up with plane coefficients such that the plane contains any three vertices, each with a high precision, necessarily results in humongous numbers that would require 256 bits. I wanted to try doing everything with 64-bit as I still felt like it should be doable and I figured it would really benefit the speed through reduced memory usage, and as I could use SIMD too.</p>
-<p>I didn&rsquo;t want to give up yet with 64-bit coordinates, and this made me think about more ways to go about the problem. I was looking into the possibility of <a href="https://users.cs.utah.edu/~ladislav/jacobson13robust/jacobson13robust.html">using tetrahedral meshes and winding numbers (A. Jacobson et al.)</a>, when I asked the question: there may be quantization errors, but why is it that it doesn&rsquo;t matter as much in some mesh representations like voxels or tetrahedral meshes, whereas with mine it&rsquo;s a deal breaker? It occurred to me that my boundary representation has too much information that can go out of sync with itself and become invalid. With, say a voxel bitmap, the solid/empty space is always unambiguously defined no matter how you tweak the values. This realization led me to investigate BSP trees, as they have the same property. Using a volume-based representation was promising for another reason too that I had in mind. I thought it was cool how the method by Jacobson et al. could solve self-intersections. If I had that working in my editor, I could imagine moving a face/edge/vertex around and make things self-intersect, and to see a hole automatically appear in the place of the self-intersection. Wouldn&rsquo;t that be awesome?</p>
-<h2 id="using-bsp-trees">Using BSP trees</h2>
-<p>So once again, I made a new algorithm. This time, the idea was to have two functions: one to go from a BSP tree into a plane-based boundary mesh, and vice versa. In short, to perform a boolean, I&rsquo;d cut the BSP tree of mesh A by all of the faces of mesh B, and afterwards, per each sub-region of space in the cut BSP tree, determine if it&rsquo;s inside mesh A and B, and use the boolean op again to determine if the sub-region should end up solid or empty. Then, we could just convert the resulting BSP tree into a boundary mesh and render it directly! One nice thing about doing the round trip from BSP -&gt; boundary -&gt; BSP is that it automatically cleans up the BSP tree from redundant splits, assuming we deduplicate overlapping planes while doing it. And yes, I finally got it to work robustly!</p>
+<p>After a break from this project, I got back and found some more promising papers, such as <a href="https://arxiv.org/abs/2103.02486">Fast Exact Booleans for Iterated CSG using Octree-Embedded BSPs</a> and more recently <a href="https://www.vci.rwth-aachen.de/publication/03339/">EMBER: Exact Mesh Booleans via Efficient &amp; Robust Local Arrangements</a>, both by the same authors. Interestingly, the papers use exact integer arithmetic, but manage to avoid the problem I described before. The main idea is to represent all geometry using planes, where a plane is defined as the four fixed-size integer coefficients <code>A, B, C, D</code> of the plane equation <code>Ax + By + Cz + D = 0</code>. Edges are represented as the intersection of two planes, points by the intersection of three planes, and (convex) polygons by a plane and a list of edge planes. A nice property of boolean operations is that the result of a boolean is fully made up of polygons from either of its input meshes, possibly flipped or cut by each other&rsquo;s planes. It&rsquo;s then possible to represent the boolean result mesh using only the original planes from the two input meshes. That&rsquo;s perfect, as we can apply boolean operations as many times as we want without growing the bit complexity or losing any information! The coefficients will always stay within a fixed range.</p>
+<p>After some trial and error, I followed a similar approach to the first paper. My approach was to keep a BSP tree with each leaf cell being either solid or empty, and to have an operation to convert it to a half-edge boundary representation and vice versa. To perform a boolean, mesh A&rsquo;s BSP tree would be cut by the faces of mesh B, then for each leaf BSP cell in A, determine if it&rsquo;s inside mesh A and B, and depending on the boolean op make it either solid or empty. Then, convert the BSP tree of A into a boundary mesh, and to a triangle mesh, and render it using a traditional GPU pipeline. A nice bonus about doing the round trip from BSP -&gt; boundary mesh -&gt; BSP is that it automatically cleans up the BSP tree from redundant splits, keeping it as simple as it can be.</p>
 <p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/TDFQl0qRzqs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<em>(also see the first video at the top of this post which is using BSPs)</em></p>
-<p>There was a lot of possible optimizations I could have done, like using a grid acceleration structure to localize the required area of work, and to parallelize it. But first, I wanted to see if I could implement some basic editing features, and for that I needed to implement selections.</p>
-<h2 id="implementing-selections">Implementing selections</h2>
-<p>My idea for rectangle selections was simple enough: keep track of the brush ID, pass it as a vertex attribute and render it to a separate render target, then when selecting, run a compute shader over the render target and build a list of brush IDs that are visibly selected within the selection rectangle. But once again, it wasn&rsquo;t that easy. The problem was that when converting BSP -&gt; boundary -&gt; BSP, then the redundant splits get removed and with it, the information about the original brush ID gets merged and lost. My solution for this has been to avoid the BSP -&gt; boundary -&gt; BSP roundtrip and always keep building into the same BSP without removing any splits, and this has worked fine. The downside of course is that the BSP tree will keep growing and the growth could become exponential due to the way BSP cuts work. Having a grid should help there, and I&rsquo;m thinking that for a potential &ldquo;sculpt&rdquo; mode I will disallow selections and merge the tree, thus keeping it fast, but for &ldquo;blockout&rdquo; mode keep the ability to select and tweak individual brushes and accept the cost. Sculpting should be way more compute-heavy, so this should be a fine tradeoff.</p>
-
+<em>Importing a mesh into my program which performs a boolean op and exports it, then importing it back into blender.</em></p>
+<p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/_NOYwEfi6w4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<p>I&rsquo;ve rambled for long enough and there&rsquo;s just too many things to talk about. I finally feel like I&rsquo;m coming out on top, though there are still a lot of things to do. I&rsquo;ve decided to take a rest from this project for now to work on something a bit different, but I&rsquo;ll see you again soon, mesh booleans.</p><ul class="pa0">
+<em>Rectangle selections can be implemented using the GPU by keeping track of the shape ID per each vertex, rendering the shape ID to a separate render target, and running a compute shader over it to build a list of shape IDs that are within the current selection rectangle.</em></p>
+<h2 id="the-future">The future</h2>
+<p>Right now, I&rsquo;m looking further into a method for doing mesh booleans in a way where self-intersections are supported (as opposed to having 2 non-self-intersecting input shapes at a time). This would allow for fun things like <a href="https://blender.stackexchange.com/questions/228336/correct-way-to-extrude-inward-intrude">Sketchup-style extrusions</a>, and would generally be more robust when introducing more general polygonal modeling tools. I&rsquo;ve started prototyping it in 2D this time and I&rsquo;ll definitely keep working on it to bring it into 3D and to finally start making some better modeling tools for it as well :)</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/QbqmdJI531A" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div><ul class="pa0">
   
 </ul>
 <div class="mt6 instapaper_ignoref">
