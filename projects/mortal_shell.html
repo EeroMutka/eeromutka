@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+		html,
+		body {
+			/*font-family: georgia,times,serif;*/
+			/*font-family: athelas,georgia,serif;*/
+			font-family: monospace;
+			color: #FFFFCC;
+			background: rgb(0, 0, 0) url("../banner.png") no-repeat;
+			background-size: 100%;
+			background-attachment: fixed;
+			padding: 0px;
+			margin: 0px;
+		}
+		a {
+			color: #FFFFCC;
+		}
+		.shadowedtext {
+			text-shadow: rgb(0, 0, 0) 1px 0 20px;
+		}
+		.mainbody {
+			background: rgb(25, 25, 25);
+		}
+		.myalignleft {
+			text-align: left;
+		}
+		.mycolumn40 {
+			float: left;
+			width: 40%;
+			padding: 7px;
+		}
+		.mycolumn20 {
+			float: left;
+			width: 23%;
+			padding: 7px;
+		}
+		.myrow::after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+
+	</style>
+</head>
+
+<body>
+	<br>
+	<center><h1 class="shadowedtext">Eero Mutka</h1></center>
+	<center><h2 class="shadowedtext">Game/Engine Programmer</h2></center>
+	<br>
+	<div class="mainbody">
+		<hr color="gray">
+		<center>
+		<a href="../index.html"><big>Home</big></a> |
+		<a href="https://www.linkedin.com/in/eero-mutka/"><big>Linkedin</big></a> |
+		<a href="https://www.youtube.com/@eeromutka186"><big>Youtube</big></a> |
+		<a href=https://mastodon.gamedev.place/@EeroMutka"><big>Mastodon</big></a>
+		</center>
+		<hr color="gray">
+		
+		<center>
+		<br>
+		<h1>Mortal Shell</h1>
+		</center>
+		
+		<div style="text-align: center;">
+		<div style="display: inline-block; width: 50%; text-align: left; font-size: large;">
+			<p>I worked on “Mortal Shell” as a gameplay programmer and designer. Mortal Shell is a soulslike action-RPG set in a shattered world where your skill and resilience is tested. Since release, the game has sold over 500 000 copies worldwide, and received a metacritic score of 76.</p>
+
+			<br>
+			<iframe width="100%" height="400" src="https://www.youtube.com/embed/r16Dc_jMWzA""></iframe>
+			<i>Gameplay footage starts at 0:49</i><br><br>
+			
+			<p>I was very much a generalist on the team, implementing and refining a lot of gameplay elements and interactions using Unreal Engine 4's blueprints. I did a lot of polishing and bugfixing in many different areas of the game. I might have gotten a task, such as "The cathedral level needs a gate that gets unlocked by finding 3 different levers." I would then do my best to make it as polished as possible, with animation curves, utilizing existing sounds and particles and passing around ideas with the team. The core team was pretty small with only 15 people, so I got a lot of artistic freedom with the tasks.</p>
+
+			<p>An example of a mechanic I made is the big radial waves that the final boss in the game creates, as seen in this video (at 4:18)</p>
+			<iframe width="100%" height="400" src="https://www.youtube.com/embed/_x_g0NE_mWE?start=258""></iframe>
+			
+			<p>A big spreading wave is spawned when The Unchained slams into the water. I created this effect by spawning a tesselated plane with a special material for the duration of the wave. The material is using a simple sine function as a function of time and distance from the origin to calculate a world position offset value for the vertices, and to control the opaqueness. I also added a foam effect to the material by using textures, and spawned foam particle systems whenever the player goes through the wave. The wave is supposed to knock the player down on impact, unless if they dash through it or turn into stone form as in the video. To check for wave collision, I added a wave-height function into the wave blueprint that matches the one in the material that can then be called every frame. The wave shouldn't instantly knock down the player, so I also added a time-spent-in-wave threshold to it. If the player gets knocked down (see 4:30 in the video), an animation montage plays out that I combined from multiple animations where they roll on the water and rise back up. I was happy with how it all felt with everything combined!</p>
+
+			<p>I also need to mention the bear trap. When I joined the project, you could randomly get bitten by an almost invisible bear trap. They felt bad and I talked to the director about it. He agreed and was contemplating removing them, but I saw potential and took on the task to remake them and balance them in the level so they feel fair. The goal is to troll the player a little, and to make them keep track of another danger that lurks in the hostile world. It's a risky mechanic and if taken too far, people will hate, so it was important to balance it well.</p>
+
+			<iframe width="100%" height="400" src="https://www.youtube.com/embed/9r2x4vcJV_k?start=51""></iframe>
+
+			<p>I made the trap larger and tweaked their locations to be more visible in the level and added a subtle spotlight to them. I improved the animation transitions and the transform snapping, as it previously felt like you would get teleported in a disorienting way. I made the trap give very little damage so you'd most likely not die to it if you get bitten (though enemies could still attack you while trapped). As a fun bonus, I made it so that enemies can also get bit so you can lure them into traps if you want. So we kept the bear trap, and I don't feel bad for the little bit of evil I've caused :)</p>
+
+		</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+	</div>
+
+</body>
+
+</html>
