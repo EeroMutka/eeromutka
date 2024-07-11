@@ -81,7 +81,7 @@
 			<p>Renderer written with C++ and Vulkan to study modern rendering techniques and to experiment with some ideas I had for real-time global illumination.</p>
 			
 			<br>
-			<iframe width="100%" height="400" src="https://www.youtube.com/embed/DZkTVobNMT4""></iframe>
+			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/DZkTVobNMT4""></iframe>
 			<br>
 
 			<p>Before this project, I had already made a few toy renderers and had a pretty good understanding of many rendering techniques, but I never went the full way to make something really polished. So I wanted to challange myself, and to learn how to do it with Vulkan</p>
@@ -97,7 +97,7 @@
 			<p>One good way to compute GI is to bake it into lightmaps, but I wanted to try making it dynamic such that lightmaps wouldn't be required. The idea I had was to take the basis of VXGI, which is voxelizing the world into a 3D texture, marking each voxel with either a radiance value or a blocker/wall, and running a simulation to flood light around it each frame. The light would then softly propagate from a light source (either a light-entity or an emissive surface), and slowly fade away in the distance creating areas of darkness. The idea differs from VXGI, where the idea is to generate a mipmap chain of the voxelized 3D texture and to sample from it with increasing mip-levels outwards from the surface normal in the main fragment shader. The reason I wanted to try my version was to avoid light leaks. With VXGI, if you had a house in direct sunlight and it had a dark room, then the floor of that room could incorrectly catch light from the outside as the mipmap-cone-trace could go trough the ceiling and catch light from the outside. With my light flooding simulation idea, light wouldn't go through objects.</p>
 
 			<p>First I made an experiment in 2D to see how this light flooding simulation could work, or if it even is possible:</p>
-			<iframe width="100%" height="400" src="https://www.youtube.com/embed/A5pfLBzvuzE""></iframe>
+			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/A5pfLBzvuzE""></iframe>
 
 			<p>It was looking promising, so I took it to 3D:</p>
 			<img src="vulkan_renderer_data/sponza_gi.png" style="width:100%;">
@@ -116,7 +116,7 @@
 
 			<p>Here was how the renderer looked like at this point with everything implemented except for GI. In this version, I was also experimenting with <a href="https://cdrinmatane.github.io/posts/cgspotlight-slides/">SSAO using visibility bitmask and screen-space bent normals</a>, which I ended up not using in the final demo.</p>
 
-			<iframe width="100%" height="400" src="https://www.youtube.com/embed/OwNb4dBba7Y""></iframe>
+			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/OwNb4dBba7Y""></iframe>
 
 			<p>Next, I ported my GI system into this project. I also made the voxelization calculate a direct lighting value using the sun depth buffer and inject that into the light grid. This meant that the spots where the sun hits be a source of light for the flooding stage. In the following image, you can see the light grid visualized by ray tracing into it. For rough reflections and ambient light, it can be useful to not trace all the way, but to accumulate light on the path as if it was fog. This reduces noise since there is less variation between the directions. You can see the "foggy" version on the bottom.</p>
 
