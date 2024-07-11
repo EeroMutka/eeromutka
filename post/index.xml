@@ -1,21 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Articles on </title>
-    <link>http://eeromutka.github.io/post/</link>
-    <description>Recent content in Articles on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 02 Mar 2017 12:00:00 -0500</lastBuildDate><atom:link href="http://eeromutka.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>The reference massacre</title>
-      <link>http://eeromutka.github.io/post/the_reference_massacre/</link>
-      <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://eeromutka.github.io/post/the_reference_massacre/</guid>
-      <description>Quick test: Can you spot the bug in the following C++ code?
-void spawn_explosion(GameWorld* world, const Vector3&amp;amp; explode_at, float size){for (int i = world-&amp;gt;entities.count - 1; i &amp;gt;= 0; i--){if (length(world-&amp;gt;entities[i].position - explode_at) &amp;lt; size){// This unlucky fellow was too close to the explosionarray_remove(&amp;amp;world-&amp;gt;entities, i);}}// spawn some epic particles, etc...} It&amp;rsquo;s tricky, because by itself, there is no bug.</description>
-    </item>
-    
-  </channel>
-</rss>
