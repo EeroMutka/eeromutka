@@ -114,7 +114,7 @@
 			
 			<h2>Player Input</h2>
 			
-			<p>The game idea was pitched and greenlit, but we hadn't yet discussed how to actually make a carpet controllable. As long as we had up/down/left/right movement, we'd be happy. There were various ideas: distance-measuring strings attached to the ends of the carpet, joysticks underneath, taped wii controllers... We settled on Nintendo switch controllers thanks to their light and compact form. It was my task to figure out the rest.</p>
+			<p>The game idea was pitched and greenlit, but we hadn't yet discussed how to actually make a carpet controllable. As long as we had up/down/left/right movement, we'd be happy. There were various ideas: distance-measuring strings attached to the ends of the carpet, joysticks underneath, taped wii controllers... We settled on Nintendo switch controllers and velcro tape thanks to their light and compact form. It was my task to figure out the rest.</p>
 			
 			<p>A joycon has both an accelerometer and a gyroscope sensor. The accelerometer tracks acceleration in each axis, while the gyroscope tracks the angular momentum about each axis. The goal was to extract the absolute position of the controller (holding the carpet up should steer up, down to down, etc...). The proper way to find the absolute absolute position would be to integrate the accelerometer data to get the velocity, and to integrate the velocity to get the position. The issue is that small errors lead to the position and velocity drifting away from their true value quickly. If we wanted to find the absolute rotation instead of position, the same problem would still apply as we'd have to integrate the angular momentum / gyroscope input.</p>
 			
