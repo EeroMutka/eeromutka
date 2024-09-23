@@ -79,25 +79,25 @@
 		<div style="text-align: center;">
 		<div style="display: inline-block; width: 50%; text-align: left; font-size: large;">
 			<p>Mortal Shell is a soulslike action-RPG for PC and consoles. I worked on the game as a gameplay programmer as part of a 15-person team.</p>
-
+			
 			<p><a href="https://store.steampowered.com/app/1110910/Mortal_Shell/">Link to the Steam page</a></p>
-
+			
+			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/l76YMR5cSSo""></iframe>
+			<i>Full game playthrough</i><br>
 			<br>
-			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/r16Dc_jMWzA""></iframe>
-			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/URenjfdt9qQ""></iframe>
-			
-			<p>My role was to be a generalist, implementing and refining a lot of gameplay elements and interactions using Unreal Engine 4's blueprints. I did a lot of polishing and bugfixing in many different areas of the game. I might have gotten a task, such as "The cathedral level needs a gate that gets unlocked by finding 3 different levers." I would then do my best to make it as polished as possible, with animation curves, utilizing existing sounds and particles and passing around ideas with the team. The core team was pretty small with only 15 people, so I got a lot of artistic freedom with the tasks.</p>
 
-			<p>An example of a mechanic I made is the big radial waves that the final boss in the game creates, as seen in this video (at 4:18)</p>
+			<p>My role as a gameplay programmer was to implement and refine gameplay mechanics, interactable objects and enemy/boss interactions, and of course to fix bugs. I mainly worked inside UE4's blueprints, building gameplay logic and connecting effects like sounds, particle effects and animations together. A lot of my work had to do with timing and curves; I often used UE4's blueprint timelines for making the mechanics feel <i>juicy</i>. The team was relatively small, and I was given a lot of artistic freedom for the design and implementation of mechanics.</p>
+
+			
+			
+			<br>
 			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/_x_g0NE_mWE?start=258""></iframe>
+			<i>See 4:18 for the wave attack</i><br>
+
+			<p>An example of a mechanic I made is the big radial waves that the final boss in the game creates as seen above. A big spreading wave is spawned when The Unchained slams into the water. A tesselated plane is spawned with a special material for the duration of the wave. The material is using a sine function as a function of time and distance to calculate a vertex offset and to control the opacity. The wave is supposed to knock the player down on impact unless if they dash through it or turn into stone form as in the video. To check for overlap, I copied the wave function from the material into the wave blueprint such that they match and compute it at the player location. If the wave is high enough at the player for some small duration, the player gets knocked down (see 4:30 in the video). An animation montage plays that I combined from multiple animations where the player rolls on the water and rises back up. A foam particle system is also enabled when the player is in a wave.</p>
 			
-			<p>A big spreading wave is spawned when The Unchained slams into the water. I created this effect by spawning a tesselated plane with a special material for the duration of the wave. The material is using a simple sine function as a function of time and distance from the origin to calculate a world position offset value for the vertices, and to control the opaqueness. I also added a foam effect to the material by using textures, and spawned foam particle systems whenever the player goes through the wave. The wave is supposed to knock the player down on impact, unless if they dash through it or turn into stone form as in the video. To check for wave collision, I added a wave-height function into the wave blueprint that matches the one in the material that can then be called every frame. The wave shouldn't instantly knock down the player, so I also added a time-spent-in-wave threshold to it. If the player gets knocked down (see 4:30 in the video), an animation montage plays out that I combined from multiple animations where they roll on the water and rise back up. I was happy with how it all felt with everything combined!</p>
+			<p>For the final boss, I also implemented the whirlpool phase (at 7:13 in the video), the slam attack (at 2:05) and beak attack (at 2:10). To name some other things I worked on, I worked on the gates, teleporters, levers and elevators in the cathedral level, the ballistazooka attack, the bear traps, various attacks for the wraith enemy, the brigand enemy AIs, the Gorf NPC, the frog enemies, lutes and the wormfish.</p>
 
-			<p>I also need to mention the bear trap. When I joined the project, you could randomly get bitten by an almost invisible bear trap. They felt bad and I talked to the director about it. He agreed and was contemplating removing them, but I saw potential and took on the task to remake them and balance them in the level so they feel fair. The goal is to troll the player a little, and to make them keep track of another danger that lurks in the hostile world. It's a risky mechanic and if taken too far, people will hate, so it was important to balance it well.</p>
-
-			<iframe allow="fullscreen;" width="100%" height="400" src="https://www.youtube.com/embed/9r2x4vcJV_k?start=51""></iframe>
-
-			<p>I made the trap larger and tweaked their locations to be more visible in the level and added a subtle spotlight to them. I improved the animation transitions and the transform snapping, as it previously felt like you would get teleported in a disorienting way. I made the trap give very little damage so you'd most likely not die to it if you get bitten (though enemies could still attack you while trapped). As a fun bonus, I made it so that enemies can also get bit so you can lure them into traps if you want. So we kept the bear trap, and I don't feel bad for the little bit of evil I've caused :)</p>
 
 		</div>
 		</div>

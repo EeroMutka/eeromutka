@@ -80,7 +80,7 @@
 		<div style="display: inline-block; width: 50%; text-align: left; font-size: large;">
 			
 			<h2>Intro</h2>
-			<p>When building software that require user interfaces, I want to make it intuitive and responsive. In the past, I've used the <a href="https://github.com/ocornut/imgui">Dear Imgui</a> library, which popularized the immediate-mode paradigm by being really easy to use. But at some point, I wanted more control, so I decided to make a UI library taking the good ideas of Dear Imgui and adding my own flare on top.</p>
+			<p>In the past, I've used the <a href="https://github.com/ocornut/imgui">Dear Imgui</a> library for building UIs. It's great for debug menus, but it has its limitations and I wanted more control, so I decided to build an UI system inspired by it.</p>
 			
 			<h2>Features</h2>
 			
@@ -91,20 +91,20 @@
 			<li>Number edit boxes <i>(0:04)</i></li>
 			<li>Text edit boxes <i>(0:14)</i></li>
 			<li>Checkboxes <i>(0:30)</i></li>
-			<li>Layout algorithm with flexibility parameters <i>(0:34)</i></li>
+			<li>Auto-layout algorithm with flexible size modes <i>(0:34)</i></li>
 			<li>Color picker <i>(0:40)</i></li>
 			<li>Rearrangeable boxes <i>(0:58)</i></li>
 			<li>Scroll-regions <i>(1:10)</i></li>
 			<li>Dropdown menus <i>(1:35)</i></li>
 			<li>Keyboard navigation <i>(1:47)</i></li>
 			
-			<p>You can find the UI library and demo code at: <a href="https://github.com/EeroMutka/Fire">https://github.com/EeroMutka/Fire</a></p>
+			<p>You can find my UI library and demo code at: <a href="https://github.com/EeroMutka/Fire">https://github.com/EeroMutka/Fire</a></p>
 
 			<h2>Implementation</h2>
 
-			<p>The traditional approach to creating UIs is using the so-called retained-mode style. Retained mode systems typically define a C++ class hierarchy of widget types, which the user manually instantiates and manages. In immediate-mode style, the user doesn't manage the UI objects explicitly, but rather generates the entire UI each frame from scratch. This means that the UI object don't need to be manually updated whenever something changes in the user program, and it's thus easier and less error-prone to make dynamic UIs.</p>
+			<p>The typical way to build a UI system is to use the so-called retained-mode style. There's typically an object-oriented class hierarchy of widget types which the user manually instantiates and manages. In immediate-mode style, the user doesn't manage the UI objects explicitly, but rather generates the entire UI each frame from scratch. This means that the UI object don't need to be manually updated whenever something changes in the user program, and it's thus easier and less error-prone to make dynamic UIs. Dear ImGui popularized this paradigm, and I wanted my code to follow a similar pattern.</p>
 
-			<p>The basis of my UI system is a hierarchical tree of "boxes" that get placed one after another vertically or horizontally. A box is a rectangle with a set of customizable and optional behaviours. For example, to make a button, you would add a "box" with the behaviours "has text", "clickable", "draw border" and "draw background". This could of course be wrapped in an "AddButton" function, but the point is that composition makes it easy to customize and build specialized UI widgets. This idea is talked about in depth in Ryan Fleury's <a href="https://www.rfleury.com/p/ui-part-1-the-interaction-medium">UI Articles</a>, which are a great learning resource.</p>
+			<p>The basis of my UI system is a hierarchical tree of "boxes" that get placed one after another vertically or horizontally. A box is a rectangle with a set of customizable and optional behaviours. For example, to make a button, you would add a "box" with the behaviours "has text", "clickable", "draw border" and "draw background". This could of course be wrapped in an "AddButton" function, but the point is that composition makes it easy to customize and build specialized UI widgets. This idea is talked about in depth in Ryan Fleury's <a href="https://www.rfleury.com/p/ui-part-1-the-interaction-medium">UI Articles</a>, which were a great learning resource for me.</p>
 			
 			<h2>Messages and keys</h2>
 
@@ -113,14 +113,18 @@
 			<p>There are multiple possible ways to go about keying. Dear Imgui hashes the name of a box and allows for providing extra hashing digits at the end of names. The problem is that not all UI boxes have names, or multiple boxes might share the same name. In my UI, keys must be provided explicitly for all boxes and are 64-bit integers. To make dealing with keys easier, the provided UI_KEY() macro expands into a callsite-unique key and relies on some __COUNTER__ and __FILE__ hashing trickery. Using UI_KEY() is usually enough, but if the same code gets called multiple times in a frame, then more information is needed to separate them into unique keys, or otherwise the code asserts. To separate the keys, the UI_KEY1() or UI_KEY2() macros may be used to hash together other keys into new, unique ones. Examples of this can be found in the UI demo code as well as the fire_ui library itself.</p>
 			
 			<h2>Drawing</h2>
-
+			
 			<p>After the box tree has been built and the rectangles have been calculated, it gets drawn to the screen. The drawing code has gone through a few iterations. Originally, I made a similar system to Fleury's, where rectangles are submitted to the GPU and rendered using signed distance functions with parameters for edge roundness, softness, thickness, etc. I also defined a few other shapes like circles. I scrapped it in favour of Dear Imgui-style rendering, where you build and submit just a plain-old vertex buffer each frame, where each vertex has a position and a color and optionally a texture. All geometry is then generated on the CPU, but because of this it's also more flexible. A new library user can look at the provided drawing functions, copy code from it, make variations, and do whatever they like, all without touching any shader code.</p>
 			
-		</div>
-		</div>
+			<h2>Extensibility (TODO: finish this section)</h2>
 
-		<br>
-		<br>
+			<p>Designing the library has been an excercise in composability and extensibility. How to make it extensible? - callbacks. "replaceable functions style". "keep the types simple". "reduce dependencies". "keep the core minimal, but flexible". </p>
+
+		</div>
+	</div>
+	
+	<br>
+	<br>
 		<br>
 		<br>
 		<br>
